@@ -19,7 +19,10 @@ ZONES = [
 ]
 ZK = {'posada':'z_posada','enerito':'z_enerito','prime':'z_prime','deluxe':'z_deluxe','restaurante':'z_rest','praia':'z_praia'}
 NAMES = {'pt':'PT','es':'ES','en':'EN'}
-PAGES = ['home', 'pousada', 'passeios', 'restaurante']
+BASE = os.environ.get('BASE', '')
+VARIANT = os.environ.get('VARIANT', 'main')
+PAGES = ['home', 'pousada', 'passeios', 'restaurante'] if VARIANT == 'main' else ['home', 'suites', 'pousada', 'passeios', 'restaurante']
+TPLMAP = {} if VARIANT == 'main' else {'home': 'home_a', 'pousada': 'pousada_a'}
 PRELOAD_HOME = ('<link rel="preload" as="image" href="/img/hero-celu-600.webp" media="(max-width: 899px)" imagesrcset="/img/hero-celu-600.webp 600w, /img/hero-celu-900.webp 900w" imagesizes="100vw">\n'
                 '<link rel="preload" as="image" href="/img/hero-desk-1600.webp" media="(min-width: 900px)" imagesrcset="/img/hero-desk-960.webp 960w, /img/hero-desk-1600.webp 1600w" imagesizes="60vw">\n')
 
@@ -37,7 +40,7 @@ def img_macro(m, pg):
             f'width="{w}" height="{h}" alt="{esc(alt)}" {load} decoding="async">')
 
 def page_path(lang, page):
-    base = T[lang]['path']
+    base = BASE + T[lang]['path']
     return base if page == 'home' else base + PG[lang][page]['slug']
 
 def hand_acc(html):
@@ -48,7 +51,7 @@ def hand_acc(html):
 
 def cta(kind, t, pg):
     if kind == 'BOOK':
-        btns = f'<a class="btn btn--sol btn--lg" href="{{{{MOTOR}}}}" target="_blank" rel="noopener" data-book>{t["reservar_cta"]}</a><a class="btn btn--line-claro btn--lg" href="{{{{NB}}}}#suites">{t["ver_suites"]}</a>'
+        btns = f'<a class="btn btn--sol btn--lg" href="{{{{MOTOR}}}}" target="_blank" rel="noopener" data-book>{t["reservar_cta"]}</a><a class="btn btn--line-claro btn--lg" href="{{{{P_SUITES}}}}">{t["ver_suites"]}</a>'
     elif kind == 'WA':
         btns = f'<a class="btn btn--sol btn--lg" href="{{{{WA}}}}" target="_blank" rel="noopener">{t["wa_label"]}</a><a class="btn btn--line-claro btn--lg" href="{{{{MOTOR}}}}" target="_blank" rel="noopener" data-book>{t["reservar_cta"]}</a>'
     else:
@@ -66,7 +69,7 @@ for lang, t in T.items():
         pg = PG[lang].get(page, {})
         here = page_path(lang, page)
         langs = ''.join(f'<a href="{page_path(l, page)}" hreflang="{T[l]["htmllang"]}" lang="{T[l]["htmllang"]}"' + (' aria-current="true"' if l == lang else '') + f'>{NAMES[l]}</a>' for l in T)
-        main = open(f'{B}/pages/{page}.html').read()
+        main = open(f'{B}/pages/{TPLMAP.get(page, page)}.html').read()
         main = re.sub(r'\[\[img (\S+) (\d+) (\S+)( eager)?\]\]', lambda m: img_macro(m, pg), main)
         main = main.replace('{{CTA_BOOK}}', cta('BOOK', t, pg) if pg else '').replace('{{CTA_WA}}', cta('WA', t, pg) if pg else '').replace('{{CTA_WA_REST}}', cta('REST', t, pg) if pg else '')
         main = re.sub(r'\{\{pg\.(\w+)\}\}', lambda m: pg[m.group(1)], main)
@@ -78,7 +81,11 @@ for lang, t in T.items():
             'TITLE': t['title'] if page == 'home' else pg['title'], 'DESC': t['desc'] if page == 'home' else pg['desc'],
             'PAGE': here, 'ALT_pt': page_path('pt', page), 'ALT_es': page_path('es', page), 'ALT_en': page_path('en', page),
             'PRELOAD': PRELOAD_HOME if page == 'home' else '', 'INTRO_ON': 'true' if page == 'home' else 'false',
-            'NB': '' if page == 'home' else t['path'],
+            'NB': '' if page == 'home' else BASE + t['path'],
+            'P_SUITES': (page_path(lang, 'suites') if VARIANT != 'main' else ('' if page == 'home' else BASE + t['path']) + '#suites'),
+            'P_CAFE': (page_path(lang, 'pousada') + '#cafe' if VARIANT != 'main' else ('' if page == 'home' else BASE + t['path']) + '#cafe'),
+            'ROBOTS': '<meta name="robots" content="noindex">' if BASE else '',
+            'CUR_suites': ' aria-current="page"' if page == 'suites' else '',
             'P_POUSADA': page_path(lang, 'pousada'), 'P_REST': page_path(lang, 'restaurante'), 'P_PASSEIOS': page_path(lang, 'passeios'),
             'CUR_pousada': ' aria-current="page"' if page == 'pousada' else '', 'CUR_rest': ' aria-current="page"' if page == 'restaurante' else '',
             'CUR_passeios': ' aria-current="page"' if page == 'passeios' else ''})
@@ -91,6 +98,7 @@ for lang, t in T.items():
         sitemap.append((page, lang))
         print(lang, page, len(full))
 
+if BASE: raise SystemExit(0)
 today = time.strftime('%Y-%m-%d')
 urls = ''.join(f'<url><loc>{SITE}{page_path(l, p)}</loc><lastmod>{today}</lastmod>' + ''.join(f'<xhtml:link rel="alternate" hreflang="{T[k]["htmllang"]}" href="{SITE}{page_path(k, p)}"/>' for k in T) + '</url>' for p, l in sitemap)
 open(W + '/sitemap.xml', 'w').write('<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">' + urls + '</urlset>\n')

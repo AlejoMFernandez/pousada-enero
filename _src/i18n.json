@@ -233,7 +233,17 @@
   "av_score": "Nota",
   "q_d1": "julho de 2026 · Suíte Dupla",
   "q_d2": "setembro de 2026 · Suíte Deluxe",
-  "q_d3": "outubro de 2026 · Suíte Dupla"
+  "q_d3": "outubro de 2026 · Suíte Dupla",
+  "su_all": "Ver as 14 suítes",
+  "ex_eyebrow": "A experiência",
+  "ex_t": "Muito além <em>do quarto.</em>",
+  "ex_1t": "A pousada",
+  "ex_1p": "Frente de praia, redes, espreguiçadeiras e jardins, sempre com pouca gente.",
+  "ex_2t": "Café na cesta",
+  "ex_2p": "Você escolhe o lugar e a cesta chega com girassóis e um bom dia com seu nome.",
+  "ex_2l": "Ver o café",
+  "ex_3t": "Restaurante Enero",
+  "ex_3p": "Aberto ao público todos os dias, das 12h às 20h30, com os pés na areia."
  },
  "es": {
   "htmllang": "es",
@@ -469,7 +479,17 @@
   "av_score": "Puntuación",
   "q_d1": "julio de 2026 · Suite Doble",
   "q_d2": "septiembre de 2026 · Suite Deluxe",
-  "q_d3": "octubre de 2026 · Suite Doble"
+  "q_d3": "octubre de 2026 · Suite Doble",
+  "su_all": "Ver las 14 suites",
+  "ex_eyebrow": "La experiencia",
+  "ex_t": "Mucho más <em>que la habitación.</em>",
+  "ex_1t": "La pousada",
+  "ex_1p": "Frente de playa, hamacas, reposeras y jardines, siempre con poca gente.",
+  "ex_2t": "Desayuno en la canasta",
+  "ex_2p": "Elegís el lugar y la canasta llega con girasoles y un bom dia con tu nombre.",
+  "ex_2l": "Ver el desayuno",
+  "ex_3t": "Restaurante Enero",
+  "ex_3p": "Abierto al público todos los días, de 12 a 20:30 h, con los pies en la arena."
  },
  "en": {
   "htmllang": "en",
@@ -705,6 +725,16 @@
   "av_score": "Score",
   "q_d1": "July 2026 · Double Suite",
   "q_d2": "September 2026 · Deluxe Suite",
-  "q_d3": "October 2026 · Double Suite"
+  "q_d3": "October 2026 · Double Suite",
+  "su_all": "See all 14 suites",
+  "ex_eyebrow": "The experience",
+  "ex_t": "Much more <em>than a room.</em>",
+  "ex_1t": "The pousada",
+  "ex_1p": "Beachfront tables, hammocks, loungers and gardens, never crowded.",
+  "ex_2t": "Breakfast in a basket",
+  "ex_2p": "Pick your spot and the basket arrives with sunflowers and a bom dia note with your name.",
+  "ex_2l": "See breakfast",
+  "ex_3t": "Restaurante Enero",
+  "ex_3p": "Open to the public every day, 12 pm to 8:30 pm, with your toes in the sand."
  }
 }

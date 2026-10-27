@@ -798,3 +798,27 @@ body.lock .bot:not(.is-open){opacity:0;pointer-events:none}
 .quote__tt{font-family:var(--sans) !important;font-style:normal !important;font-size:16px !important;font-weight:600;color:var(--azul);line-height:1.3 !important;margin-bottom:-6px}
 .quote__d{font-family:var(--sans) !important;font-style:normal !important;font-size:12px !important;color:var(--txt);opacity:.75}
 .quote .quote__nota{align-self:flex-start;margin-top:auto}
+
+/* ===== propuesta A ===== */
+.suites--feat{padding:var(--aire) 0 0}
+.suites--feat .arrows{display:none}
+@media (min-width:900px){.suites--feat .arrows{display:flex}}
+.feat{gap:18px;padding-top:4px;padding-bottom:18px}
+.feat .card{flex:none;width:80vw;max-width:360px;scroll-snap-align:start;animation:none}
+@media (min-width:900px){.feat .card{width:calc((min(100vw, var(--max) + var(--pad)*2) - var(--pad)*2 - 44px) / 3);max-width:none}}
+.feat__more{display:flex;flex-wrap:wrap;align-items:center;gap:12px 24px;margin-top:clamp(14px,2vw,24px)}
+.exp{padding:0 0 var(--aire)}
+.exp__grid{display:grid;grid-template-columns:minmax(0,1fr);gap:22px}
+.exp__card{display:flex;flex-direction:column;gap:8px;text-decoration:none;color:inherit;background:var(--blanco);border-radius:3px;overflow:hidden;padding-bottom:20px;transition:box-shadow .3s,transform .3s var(--ease)}
+.exp__card figure{aspect-ratio:4/3;overflow:hidden;margin-bottom:8px}
+.exp__card figure img{width:100%;height:100%;object-fit:cover;transition:transform 1s var(--ease)}
+.exp__card .exp__k,.exp__card h3,.exp__card p,.exp__card .exp__go{padding:0 20px}
+.exp__k{font-family:var(--serif);font-style:italic;font-weight:300;font-size:24px;color:var(--terracota)}
+.exp__card h3{font-family:var(--serif);font-weight:400;font-size:26px;line-height:1.15}
+.exp__card p{font-size:15px;line-height:1.55;color:var(--txt)}
+.exp__go{margin-top:auto;padding-top:8px !important;font-weight:600;font-size:15px}
+@media (hover:hover){.exp__card:hover{box-shadow:0 18px 40px -22px rgba(10,42,64,.4);transform:translateY(-3px)}.exp__card:hover figure img{transform:scale(1.05)}}
+@media (min-width:900px){.exp__grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:24px}}
+.pg-hero--short{padding-bottom:clamp(24px,4vw,48px)}
+.pg-hero--short .wrap{display:flex;flex-direction:column;gap:14px}
+.pg-hero--short + .suites{padding-top:0}

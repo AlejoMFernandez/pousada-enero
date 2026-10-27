@@ -293,6 +293,8 @@
   chips.forEach(function (b) { b.addEventListener('click', function () { setFilter(b.dataset.f); }); });
   if (clearBtn) clearBtn.addEventListener('click', function () { setFilter(null, true); });
   render();
+  var featEl = $('[data-featured]');
+  if (featEl) featEl.innerHTML = featEl.dataset.featured.split(',').map(function (id) { return byId[id]; }).filter(Boolean).map(cardHTML).join('');
   document.addEventListener('click', function (e) {
     var b = e.target.closest && e.target.closest('[data-suite]');
     if (b) { e.preventDefault(); openSuite(b.dataset.suite); }
