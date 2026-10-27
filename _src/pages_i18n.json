@@ -1,0 +1,116 @@
+{
+ "pt": {
+  "pousada": {
+   "slug": "pousada/", "title": "A pousada · Pousada Enero Maragogi", "desc": "Frente de praia, redes, espreguiçadeiras, jardins e noites na areia: conheça os espaços da Pousada Enero em Maragogi.",
+   "eyebrow": "A pousada", "h1": "Tudo a poucos passos <em>da areia.</em>",
+   "lead": "Quatro casas, um restaurante e a praia de Maragogi bem na frente. Estes são os espaços que você divide com os outros hóspedes, sempre com pouca gente e muita sombra.",
+   "b1t": "A frente de praia", "b1p": "Mesas de madeira sob guarda-sóis de palha, de frente para o mar. É onde chega a cesta do café da manhã e onde o dia passa sem pressa.",
+   "b2t": "Redes e balanços", "b2p": "Redes de crochê entre os coqueiros e balanços de madeira virados para o mar. O lugar preferido para ler, cochilar ou não fazer nada.",
+   "b3t": "Espreguiçadeiras na areia", "b3p": "Espreguiçadeiras com almofadas, no sol ou na sombra, a poucos passos da água morna de Maragogi.",
+   "b4t": "As casas e o jardim", "b4p": "Enero Pousada, Enerito, Enero Prime e Enero Deluxe ficam entre jardins e caminhos de pedra que levam direto à praia.", "b4l": "Ver as suítes",
+   "b5t": "Quando o sol se põe", "b5p": "Luzes quentes entre as palmeiras, lua sobre o mar e o restaurante aberto até as 20h30.",
+   "svt": "Incluído na sua estadia", "sv1": "Café da manhã na cesta", "sv2": "Wi-Fi grátis", "sv3": "Estacionamento grátis", "sv4": "Recepção das 8h às 21h", "sv5": "Pet friendly, um por suíte", "sv6": "Restaurante na areia",
+   "galt": "Mais da pousada", "ctat": "Escolha sua suíte <em>e venha.</em>", "ctap": "Reservando direto pelo site você tem 17% OFF em todas as suítes."
+  },
+  "passeios": {
+   "slug": "passeios/", "title": "Passeios · Pousada Enero Maragogi", "desc": "Piscinas naturais, jangada, veleiro, snorkel e buggy: os passeios de Maragogi que a recepção da Pousada Enero organiza para você.",
+   "eyebrow": "Passeios", "h1": "Maragogi <em>de perto.</em>",
+   "lead": "A recepção organiza os passeios para você. Os horários dependem da maré, então fale com a gente para combinar o melhor dia.",
+   "p1t": "Piscinas naturais", "p1p": "De lancha ou catamarã até as piscinas naturais de Maragogi, com água clara e morna. Também dá para ir até Barra Grande e o Caminho de Moisés.",
+   "p2t": "Snorkel com os peixes", "p2p": "Nas piscinas naturais os peixes nadam ao seu redor. Leve máscara e câmera à prova d'água.",
+   "p3t": "Jangada", "p3p": "Até a Croa de São Bento, com a vela tricolor, do jeito tradicional do litoral alagoano.",
+   "p4t": "Passeio de veleiro", "p4p": "Navegar nas águas cristalinas de Maragogi, com o vento a favor.",
+   "p5t": "Caiaque e stand-up", "p5p": "Remar devagar pela água transparente e ver os corais de cima.",
+   "p6t": "Buggy pelas praias", "p6p": "As praias da região de ponta a ponta, com paradas para banho.",
+   "pdt": "Sem sair da pousada", "pdp": "O pôr do sol mais bonito acontece aqui mesmo, na rede, de frente para o mar.",
+   "ctat": "Combine seu <em>passeio.</em>", "ctap": "Fale com a recepção pelo WhatsApp: indicamos o melhor dia segundo a maré."
+  },
+  "restaurante": {
+   "slug": "restaurante/", "title": "Restaurante Enero · Pousada Enero Maragogi", "desc": "Restaurante pé na areia em Maragogi, aberto ao público todos os dias das 12h às 20h30. Frutos do mar, pratos, pizzas e drinks.",
+   "eyebrow": "Restaurante Enero", "h1": "Comida boa <em>com os pés na areia.</em>",
+   "lead": "Aberto ao público todos os dias, das 12h às 20h30. Frutos do mar, pratos para dividir, pizzas e drinks de frente para o mar. Também com day use.",
+   "f1t": "Da cozinha", "f1p": "Peixe do dia, polvo, camarão, saladas frescas e pizzas de massa fina.",
+   "f2t": "Do bar", "f2p": "Caipirinhas, sucos naturais, coco gelado e drinks com fruta da estação.",
+   "f3t": "De dia e de noite", "f3p": "Mesas na areia sob os coqueiros ao meio-dia e luzes quentes quando escurece.",
+   "cdt": "Cardápio", "cdp": "O cardápio completo chega em breve aqui no site. Enquanto isso, peça pelo WhatsApp e mandamos as opções do dia.",
+   "hrt": "Horário", "hrp": "Todos os dias, 12h às 20h30", "dut": "Day use", "dup": "Aproveite a praia e a estrutura da pousada por um dia.",
+   "ctat": "Reserve sua <em>mesa.</em>", "ctap": "Escreva para a gente no WhatsApp e guardamos uma mesa na areia."
+  }
+ },
+ "es": {
+  "pousada": {
+   "slug": "pousada/", "title": "La pousada · Pousada Enero Maragogi", "desc": "Frente de playa, hamacas, reposeras, jardines y noches en la arena: conocé los espacios de la Pousada Enero en Maragogi.",
+   "eyebrow": "La pousada", "h1": "Todo a pocos pasos <em>de la arena.</em>",
+   "lead": "Cuatro casas, un restaurante y la playa de Maragogi justo enfrente. Estos son los espacios que compartís con los otros huéspedes, siempre con poca gente y mucha sombra.",
+   "b1t": "El frente de playa", "b1p": "Mesas de madera bajo sombrillas de paja, frente al mar. Ahí llega la canasta del desayuno y el día pasa sin apuro.",
+   "b2t": "Hamacas y columpios", "b2p": "Hamacas paraguayas de crochet entre los cocoteros y bancos colgantes mirando al mar. El lugar preferido para leer, dormir la siesta o no hacer nada.",
+   "b3t": "Reposeras en la arena", "b3p": "Reposeras con almohadones, al sol o a la sombra, a pocos pasos del agua tibia de Maragogi.",
+   "b4t": "Las casas y el jardín", "b4p": "Enero Pousada, Enerito, Enero Prime y Enero Deluxe están entre jardines y caminos de piedra que llevan directo a la playa.", "b4l": "Ver las suites",
+   "b5t": "Cuando se pone el sol", "b5p": "Luces cálidas entre las palmeras, luna sobre el mar y el restaurante abierto hasta las 20:30.",
+   "svt": "Incluido en tu estadía", "sv1": "Desayuno en la canasta", "sv2": "Wi-Fi gratis", "sv3": "Estacionamiento gratis", "sv4": "Recepción de 8 a 21 h", "sv5": "Pet friendly, una por suite", "sv6": "Restaurante en la arena",
+   "galt": "Más de la pousada", "ctat": "Elegí tu suite <em>y vení.</em>", "ctap": "Reservando directo en el sitio tenés 17% OFF en todas las suites."
+  },
+  "passeios": {
+   "slug": "passeios/", "title": "Paseos · Pousada Enero Maragogi", "desc": "Piscinas naturales, jangada, velero, snorkel y buggy: los paseos de Maragogi que organiza la recepción de la Pousada Enero.",
+   "eyebrow": "Paseos", "h1": "Maragogi <em>de cerca.</em>",
+   "lead": "La recepción organiza los paseos por vos. Los horarios dependen de la marea, así que escribinos para combinar el mejor día.",
+   "p1t": "Piscinas naturales", "p1p": "En lancha o catamarán hasta las piscinas naturales de Maragogi, de agua clara y tibia. También se puede ir a Barra Grande y al Camino de Moisés.",
+   "p2t": "Snorkel con los peces", "p2p": "En las piscinas naturales los peces nadan a tu alrededor. Llevá máscara y una cámara acuática.",
+   "p3t": "Jangada", "p3p": "Hasta la Croa de São Bento, con la vela tricolor, como se navega tradicionalmente en Alagoas.",
+   "p4t": "Paseo en velero", "p4p": "Navegar por las aguas cristalinas de Maragogi, con el viento a favor.",
+   "p5t": "Kayak y stand-up", "p5p": "Remar despacio por el agua transparente y ver los corales desde arriba.",
+   "p6t": "Buggy por las playas", "p6p": "Las playas de la zona de punta a punta, con paradas para bañarse.",
+   "pdt": "Sin salir de la pousada", "pdp": "El atardecer más lindo pasa acá mismo, en la hamaca, frente al mar.",
+   "ctat": "Combiná tu <em>paseo.</em>", "ctap": "Escribile a la recepción por WhatsApp: te recomendamos el mejor día según la marea."
+  },
+  "restaurante": {
+   "slug": "restaurante/", "title": "Restaurante Enero · Pousada Enero Maragogi", "desc": "Restaurante en la arena en Maragogi, abierto al público todos los días de 12 a 20:30 h. Mariscos, platos, pizzas y tragos.",
+   "eyebrow": "Restaurante Enero", "h1": "Comida rica <em>con los pies en la arena.</em>",
+   "lead": "Abierto al público todos los días, de 12 a 20:30 h. Mariscos, platos para compartir, pizzas y tragos frente al mar. También hay day use.",
+   "f1t": "De la cocina", "f1p": "Pescado del día, pulpo, camarones, ensaladas frescas y pizzas de masa fina.",
+   "f2t": "De la barra", "f2p": "Caipiriñas, jugos naturales, coco helado y tragos con fruta de estación.",
+   "f3t": "De día y de noche", "f3p": "Mesas en la arena bajo los cocoteros al mediodía y luces cálidas cuando oscurece.",
+   "cdt": "Carta", "cdp": "La carta completa va a estar pronto acá en el sitio. Mientras tanto, pedila por WhatsApp y te mandamos las opciones del día.",
+   "hrt": "Horario", "hrp": "Todos los días, de 12 a 20:30 h", "dut": "Day use", "dup": "Disfrutá la playa y las instalaciones de la pousada por un día.",
+   "ctat": "Reservá tu <em>mesa.</em>", "ctap": "Escribinos por WhatsApp y te guardamos una mesa en la arena."
+  }
+ },
+ "en": {
+  "pousada": {
+   "slug": "pousada/", "title": "The pousada · Pousada Enero Maragogi", "desc": "Beachfront tables, hammocks, loungers, gardens and evenings on the sand: discover the spaces at Pousada Enero in Maragogi.",
+   "eyebrow": "The pousada", "h1": "Everything a few steps <em>from the sand.</em>",
+   "lead": "Four houses, a restaurant and Maragogi beach right in front. These are the spaces you share with other guests, always with few people and plenty of shade.",
+   "b1t": "The beachfront", "b1p": "Wooden tables under thatched parasols, facing the sea. This is where your breakfast basket arrives and the day goes by slowly.",
+   "b2t": "Hammocks and swings", "b2p": "Crochet hammocks between the palms and wooden swings facing the sea. The favourite spot to read, nap or do nothing at all.",
+   "b3t": "Loungers on the sand", "b3p": "Cushioned loungers, in the sun or the shade, a few steps from Maragogi's warm water.",
+   "b4t": "The houses and the garden", "b4p": "Enero Pousada, Enerito, Enero Prime and Enero Deluxe sit among gardens and stone paths that lead straight to the beach.", "b4l": "See the suites",
+   "b5t": "When the sun goes down", "b5p": "Warm lights among the palms, the moon over the sea and the restaurant open until 8:30 pm.",
+   "svt": "Included in your stay", "sv1": "Breakfast in a basket", "sv2": "Free Wi-Fi", "sv3": "Free parking", "sv4": "Reception 8 am to 9 pm", "sv5": "Pet friendly, one per suite", "sv6": "Restaurant on the sand",
+   "galt": "More of the pousada", "ctat": "Pick your suite <em>and come.</em>", "ctap": "Book direct on our website and get 17% OFF every suite."
+  },
+  "passeios": {
+   "slug": "passeios/", "title": "Tours · Pousada Enero Maragogi", "desc": "Natural pools, jangada, sailing, snorkelling and buggy rides: the Maragogi tours that Pousada Enero's reception arranges for you.",
+   "eyebrow": "Tours", "h1": "Maragogi <em>up close.</em>",
+   "lead": "Reception arranges the tours for you. Times depend on the tide, so talk to us to plan the best day.",
+   "p1t": "Natural pools", "p1p": "By speedboat or catamaran to Maragogi's natural pools, with clear, warm water. You can also go to Barra Grande and the Caminho de Moisés.",
+   "p2t": "Snorkelling with the fish", "p2p": "In the natural pools the fish swim all around you. Bring a mask and a waterproof camera.",
+   "p3t": "Jangada", "p3p": "To Croa de São Bento under the tricolour sail, the traditional way along the Alagoas coast.",
+   "p4t": "Sailing", "p4p": "Sail across Maragogi's crystal-clear water with the wind behind you.",
+   "p5t": "Kayak and stand-up", "p5p": "Paddle slowly over the clear water and see the reefs from above.",
+   "p6t": "Buggy along the beaches", "p6p": "The beaches of the region end to end, with stops for a swim.",
+   "pdt": "Without leaving the pousada", "pdp": "The best sunset happens right here, from a hammock facing the sea.",
+   "ctat": "Plan your <em>tour.</em>", "ctap": "Message reception on WhatsApp: we'll suggest the best day for the tide."
+  },
+  "restaurante": {
+   "slug": "restaurante/", "title": "Restaurante Enero · Pousada Enero Maragogi", "desc": "Beachfront restaurant in Maragogi, open to the public every day from 12 pm to 8:30 pm. Seafood, mains, pizzas and drinks.",
+   "eyebrow": "Restaurante Enero", "h1": "Good food <em>with your toes in the sand.</em>",
+   "lead": "Open to the public every day, 12 pm to 8:30 pm. Seafood, plates to share, pizzas and drinks facing the sea. Day use available too.",
+   "f1t": "From the kitchen", "f1p": "Catch of the day, octopus, shrimp, fresh salads and thin-crust pizzas.",
+   "f2t": "From the bar", "f2p": "Caipirinhas, fresh juices, chilled coconut and drinks with seasonal fruit.",
+   "f3t": "Day and night", "f3p": "Tables on the sand under the palms at lunchtime, warm lights after dark.",
+   "cdt": "Menu", "cdp": "The full menu is coming to the website soon. In the meantime, ask us on WhatsApp and we'll send today's options.",
+   "hrt": "Hours", "hrp": "Every day, 12 pm to 8:30 pm", "dut": "Day use", "dup": "Enjoy the beach and the pousada's facilities for a day.",
+   "ctat": "Book your <em>table.</em>", "ctap": "Message us on WhatsApp and we'll keep a table on the sand for you."
+  }
+ }
+}

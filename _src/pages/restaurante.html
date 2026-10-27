@@ -1,0 +1,50 @@
+<section class="pg-hero pg-hero--dark" aria-labelledby="pg-t">
+  <div class="wrap pg-hero__grid">
+    <div class="pg-hero__txt">
+      <p class="eyebrow eyebrow--sol rv">{{pg.eyebrow}}</p>
+      <h1 id="pg-t" class="h2 h2--claro pg-hero__t rv">{{pg.h1}}</h1>
+      <img class="ola rv" src="/img/trazo-ola-claro.svg" alt="" width="170" height="26">
+      <p class="lead lead--claro rv">{{pg.lead}}</p>
+      <div class="pg-hero__ctas rv"><a class="btn btn--sol" href="{{WA_REST}}" target="_blank" rel="noopener">{{re_btn}}</a><a class="btn btn--line-claro" href="#cardapio">{{pg.cdt}}</a></div>
+    </div>
+    <figure class="pg-hero__fig reveal">[[img rest-5 50 pg.f3t eager]]</figure>
+  </div>
+</section>
+
+<section class="pg-blocks">
+  <div class="wrap">
+    <article class="pg-b">
+      <div class="pg-b__fotos pg-b__fotos--3">[[img rest-3 33 pg.f1t]][[img rest-4 25 pg.f1t]][[img rest-20 25 pg.f1t]]</div>
+      <div class="pg-b__txt"><span class="pg-b__n">01</span><h2 class="h2 h2--m rv">{{pg.f1t}}</h2><p class="lead rv">{{pg.f1p}}</p></div>
+    </article>
+    <article class="pg-b pg-b--rev">
+      <div class="pg-b__fotos pg-b__fotos--3">[[img rest-57 33 pg.f2t]][[img rest-9 25 pg.f2t]][[img rest-46 25 pg.f2t]]</div>
+      <div class="pg-b__txt"><span class="pg-b__n">02</span><h2 class="h2 h2--m rv">{{pg.f2t}}</h2><p class="lead rv">{{pg.f2p}}</p></div>
+    </article>
+    <article class="pg-b">
+      <div class="pg-b__fotos pg-b__fotos--2">[[img rest-18 33 pg.f3t]][[img rest-59 33 pg.f3t]]</div>
+      <div class="pg-b__txt"><span class="pg-b__n">03</span><h2 class="h2 h2--m rv">{{pg.f3t}}</h2><p class="lead rv">{{pg.f3p}}</p></div>
+    </article>
+  </div>
+</section>
+
+<section class="pg-gal">
+  <div class="wrap"><div class="pg-gal__grid pg-gal__grid--4">[[img rest-6 25 pg.f1t]][[img rest-21 25 pg.f1t]][[img rest-24 25 pg.f1t]][[img rest-50 25 pg.f1t]][[img rest-23 25 pg.f1t]][[img rest-13 25 pg.f2t]][[img rest-44 25 pg.f2t]][[img rest-0 25 pg.f1t]]</div></div>
+</section>
+
+<section class="pg-menu" id="cardapio" aria-labelledby="cd-t">
+  <div class="wrap pg-menu__grid">
+    <div class="pg-menu__card rv">
+      <img src="/img/icons/icono-restaurante.svg" alt="" width="56" height="56">
+      <h2 id="cd-t" class="h2 h2--m">{{pg.cdt}}</h2>
+      <p class="lead">{{pg.cdp}}</p>
+      <a class="btn btn--azul" href="{{WA_REST}}" target="_blank" rel="noopener">{{re_btn}}</a>
+    </div>
+    <dl class="pg-menu__info">
+      <div class="rv"><dt>{{pg.hrt}}</dt><dd>{{pg.hrp}}</dd></div>
+      <div class="rv"><dt>{{pg.dut}}</dt><dd>{{pg.dup}}</dd></div>
+    </dl>
+  </div>
+</section>
+
+{{CTA_WA_REST}}

@@ -40,7 +40,7 @@
   function heroIn() { if (hero) requestAnimationFrame(function () { hero.classList.add('is-in'); }); }
   (function intro() {
     var el = $('.intro');
-    if (!root.classList.contains('con-intro') || !el) { heroIn(); return; }
+    if (!root.classList.contains('con-intro') || !el) { root.classList.remove('con-intro'); heroIn(); return; }
     var t0 = performance.now();
     var minT = desk.matches ? 2150 : 1600;
     el.classList.add('go');
@@ -90,7 +90,7 @@
         navLinks.forEach(function (a) { a.classList.toggle('is-active', a.getAttribute('href') === '#' + e.target.id); });
       });
     }, { rootMargin: '-45% 0px -50% 0px' });
-    navLinks.forEach(function (a) { var s = $(a.getAttribute('href')); if (s) ioNav.observe(s); });
+    navLinks.forEach(function (a) { var h = a.getAttribute('href'); if (h && h.charAt(0) === '#') { var s = $(h); if (s) ioNav.observe(s); } });
   }
 
   /* ---------- menú celu ---------- */
@@ -250,46 +250,53 @@
   }
   document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && burger && burger.getAttribute('aria-expanded') === 'true') { setMenu(false); burger.focus(); } });
 
-  /* ---------- tarjetas + filtros ---------- */
-  var cardsEl = $('[data-cards]'), none = $('.cards__none'), chips = $$('[data-f]');
-  var TAGS = ['mar', 'sacada', 'terrea', 'tres'];
+  /* ---------- tarjetas + filtros (multi) ---------- */
+  var cardsEl = $('[data-cards]'), none = $('.cards__none'), chips = $$('[data-f]'), countEl = $('[data-count]'), clearBtn = $('[data-clear]');
+  var active = [];
+  var PERSON = '<svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="4.6" r="3"/><path d="M2.4 15c0-3.6 2.5-6 5.6-6s5.6 2.4 5.6 6z"/></svg>';
   function cardHTML(c, i) {
     var m = c.img[0] || { f: '', w: 800, h: 600 };
-    var tags = (c.tags || []).filter(function (t) { return t === 'mar' || t === 'sacada'; }).map(function (t) { return '<span class="card__tag">' + esc(T['tag_' + t]) + '</span>'; }).join('');
-    return '<button type="button" class="card" data-suite="' + c.id + '" style="--i:' + i + '" aria-label="' + esc(c.name + ' · ' + meta(c) + ' · ' + T.seemore) + '">' +
-      '<span class="card__img"><img src="' + img(m.f, 480) + '" srcset="' + img(m.f, 480) + ' 480w, ' + img(m.f, 800) + ' 800w" sizes="(min-width: 1024px) 30vw, (min-width: 640px) 45vw, 92vw" width="' + m.w + '" height="' + m.h + '" alt="" loading="lazy" decoding="async">' +
-        (tags ? '<span class="card__tags">' + tags + '</span>' : '') +
-        '<span class="card__count">' + c.img.length + ' ' + esc(T.photos) + '</span></span>' +
-      '<span class="card__row"><span class="card__n">' + esc(c.name) + '</span><span class="card__go">' + esc(T.seemore) + ' →</span></span>' +
-      '<span class="card__meta">' + esc([unitsLabel(c), meta(c)].filter(Boolean).join(' · ')) + '</span>' +
-    '</button>';
+    var tags = (c.tags || []).filter(function (t) { return t === 'mar' || t === 'sacada' || t === 'terrea'; }).map(function (t) { return '<span class="card__tag">' + esc(T['tag_' + t]) + '</span>'; }).join('');
+    var ppl = ''; for (var k = 0; k < c.pax; k++) ppl += PERSON;
+    return '<article class="card" style="--i:' + i + '">' +
+      '<button type="button" class="card__open" data-suite="' + c.id + '" aria-label="' + esc(c.name + ' · ' + tr('people', c.pax) + ' · ' + T.details) + '">' +
+        '<span class="card__img"><img src="' + img(m.f, 480) + '" srcset="' + img(m.f, 480) + ' 480w, ' + img(m.f, 800) + ' 800w" sizes="(min-width: 1024px) 30vw, (min-width: 640px) 45vw, 92vw" width="' + m.w + '" height="' + m.h + '" alt="" loading="lazy" decoding="async">' +
+          (tags ? '<span class="card__tags">' + tags + '</span>' : '') +
+          '<span class="card__ppl" title="' + esc(tr('people', c.pax)) + '">' + ppl + '<b>' + c.pax + '</b></span>' +
+          '<span class="card__count">' + c.img.length + ' ' + esc(T.photos) + '</span></span>' +
+        '<span class="card__n">' + esc(c.name) + '</span>' +
+        (unitsLabel(c) ? '<span class="card__meta">' + esc(unitsLabel(c)) + '</span>' : '') +
+      '</button>' +
+      '<div class="card__foot"><button type="button" class="card__more" data-suite="' + c.id + '" tabindex="-1">' + esc(T.details) + ' →</button><a class="card__book" href="' + esc(E.motor) + '" target="_blank" rel="noopener">' + esc(T.book_short) + ' · 17% OFF</a></div>' +
+    '</article>';
   }
-  function render(f) {
+  function match(c, tags) { return tags.every(function (f) { return (c.tags || []).indexOf(f) > -1; }); }
+  function render() {
     if (!cardsEl) return;
-    var list = S.filter(function (c) { return f === 'all' || (c.tags || []).indexOf(f) > -1; });
+    var list = S.filter(function (c) { return match(c, active); });
     cardsEl.innerHTML = list.map(cardHTML).join('');
     none.hidden = list.length > 0;
+    if (countEl) countEl.textContent = list.length === 1 ? T.count1 : tr('count', list.length);
+    if (clearBtn) clearBtn.hidden = !active.length;
+    chips.forEach(function (b) {
+      var f = b.dataset.f, on = active.indexOf(f) > -1, n = S.filter(function (c) { return match(c, active.concat(on ? [] : [f])); }).length;
+      b.classList.toggle('is-on', on); b.setAttribute('aria-pressed', String(on));
+      var ne = $('[data-fn]', b); if (ne) ne.textContent = n;
+      b.disabled = !on && n === 0;
+    });
   }
-  function setFilter(f) {
-    chips.forEach(function (b) { var on = b.dataset.f === f; b.classList.toggle('is-on', on); b.setAttribute('aria-pressed', String(on)); });
-    render(f);
+  function setFilter(f, only) {
+    if (only) active = f ? [f] : [];
+    else { var i = active.indexOf(f); if (i > -1) active.splice(i, 1); else active.push(f); }
+    render();
   }
   chips.forEach(function (b) { b.addEventListener('click', function () { setFilter(b.dataset.f); }); });
-  render('all');
+  if (clearBtn) clearBtn.addEventListener('click', function () { setFilter(null, true); });
+  render();
   document.addEventListener('click', function (e) {
     var b = e.target.closest && e.target.closest('[data-suite]');
     if (b) { e.preventDefault(); openSuite(b.dataset.suite); }
   });
-
-  /* ---------- vista mar ---------- */
-  var vm = $('[data-vm-list]');
-  if (vm) {
-    vm.innerHTML = S.filter(function (c) { return (c.tags || []).indexOf('mar') > -1; }).map(function (c) {
-      return '<li><button type="button" data-suite="' + c.id + '"><b>' + esc(c.name) + '</b><span>' + esc(meta(c)) + '</span></button></li>';
-    }).join('');
-  }
-  var verMar = $('[data-ver-mar]');
-  if (verMar) verMar.addEventListener('click', function () { setFilter('mar'); });
 
   /* ---------- mapa satelital ---------- */
   var panel = $('[data-zona-panel]'), stage = $('[data-map-stage]'), zonas = [];
@@ -425,20 +432,50 @@
     if ('ResizeObserver' in window) new ResizeObserver(function () { render(); }).observe(stage);
   })();
 
-  /* ---------- café: barquito que navega con el scroll ---------- */
+  /* ---------- barquito que navega con el scroll (divisor) ---------- */
   var nav = $('[data-navega]');
   if (nav && !reduce) {
-    var boat = $('.navega__boat', nav), nTick = false;
+    var boat = $('.navega__boat', nav), nTick = false, bx = 0, tx2 = 0, raf2 = 0;
+    var target = function () {
+      var r = nav.getBoundingClientRect(), vh = innerHeight;
+      var p = Math.min(1, Math.max(0, (vh - r.top) / (vh + r.height)));
+      return p * (nav.clientWidth - boat.clientWidth - 8);
+    };
+    var glide = function () {
+      bx += (tx2 - bx) * 0.06;
+      boat.style.transform = 'translateX(' + bx.toFixed(1) + 'px)';
+      if (Math.abs(tx2 - bx) > 0.5) raf2 = requestAnimationFrame(glide); else raf2 = 0;
+    };
     var upd = function () {
       nTick = false;
-      var r = nav.getBoundingClientRect(), vh = innerHeight;
-      if (r.bottom < -200 || r.top > vh + 200) return;
-      var p = Math.min(1, Math.max(0, (vh - r.top) / (vh + r.height)));
-      boat.style.setProperty('--bx', (p * (nav.clientWidth - 70)) + 'px');
+      var r = nav.getBoundingClientRect(); if (r.bottom < -200 || r.top > innerHeight + 200) return;
+      tx2 = target(); if (!raf2) raf2 = requestAnimationFrame(glide);
     };
     addEventListener('scroll', function () { if (!nTick) { nTick = true; requestAnimationFrame(upd); } }, { passive: true });
-    upd();
+    bx = tx2 = target(); boat.style.transform = 'translateX(' + bx + 'px)';
   }
+
+  /* ---------- hero: punta de la vela alineada con el botón Reservar ---------- */
+  var hMedia = $('.hero__media'), bookBtn = $('.top__book');
+  function alignTip() {
+    if (!hMedia || !bookBtn) return;
+    hMedia.style.marginRight = '';
+    if (!desk.matches) return;
+    var C = hMedia.getBoundingClientRect().width, e = hero.getBoundingClientRect().right - bookBtn.getBoundingClientRect().right;
+    var m = (e - 0.06 * C) / 0.94; if (m > 0) hMedia.style.marginRight = m + 'px';
+  }
+  alignTip(); addEventListener('resize', function () { requestAnimationFrame(alignTip); });
+
+  /* ---------- hero: mismas líneas en todos los idiomas ---------- */
+  var heroT = $('.hero__t');
+  function fitHero() {
+    if (!heroT) return;
+    heroT.style.fontSize = '';
+    var lines = $$('.ln', heroT), par = heroT.parentNode, cs = getComputedStyle(par), w = par.clientWidth - parseFloat(cs.paddingLeft) - parseFloat(cs.paddingRight);
+    var max = 0; lines.forEach(function (l) { var c = l.firstElementChild; max = Math.max(max, c.scrollWidth); });
+    if (max > w) { var fs = parseFloat(getComputedStyle(heroT).fontSize); heroT.style.fontSize = Math.floor(fs * w / max * 0.98) + 'px'; }
+  }
+  if (heroT) { fitHero(); if (document.fonts && document.fonts.ready) document.fonts.ready.then(fitHero); addEventListener('resize', function () { requestAnimationFrame(fitHero); }); }
 
   /* ---------- drag con mouse + flechas ---------- */
   function dragScroll(el, snapBack) {
