@@ -1,0 +1,364 @@
+<!doctype html>
+<html lang="{{htmllang}}">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>{{title}}</title>
+<meta name="description" content="{{desc}}">
+<link rel="canonical" href="{{SITE}}{{path}}">
+<link rel="alternate" hreflang="pt-BR" href="{{SITE}}/">
+<link rel="alternate" hreflang="es" href="{{SITE}}/es/">
+<link rel="alternate" hreflang="en" href="{{SITE}}/en/">
+<link rel="alternate" hreflang="x-default" href="{{SITE}}/">
+<meta name="theme-color" content="#F7F2E8">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Pousada Enero">
+<meta property="og:locale" content="{{ogloc}}">
+<meta property="og:title" content="{{title}}">
+<meta property="og:description" content="{{desc}}">
+<meta property="og:url" content="{{SITE}}{{path}}">
+<meta property="og:image" content="{{SITE}}/img/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT@0,9..144,300..500,0..100;1,9..144,300..500,0..100&amp;family=Figtree:wght@400;500;600&amp;family=Nanum+Brush+Script&amp;display=swap">
+<link rel="preload" as="image" href="/img/hero-celu-600.webp" media="(max-width: 899px)" imagesrcset="/img/hero-celu-600.webp 600w, /img/hero-celu-900.webp 900w" imagesizes="100vw">
+<link rel="preload" as="image" href="/img/hero-desk-1600.webp" media="(min-width: 900px)" imagesrcset="/img/hero-desk-960.webp 960w, /img/hero-desk-1600.webp 1600w" imagesizes="60vw">
+<link rel="stylesheet" href="/css/styles.css?v={{V}}">
+<script>
+(function(){var d=document.documentElement;d.classList.add('js');try{if(!matchMedia('(prefers-reduced-motion: reduce)').matches&&!sessionStorage.getItem('enero-intro')){d.classList.add('con-intro');}}catch(e){}setTimeout(function(){if(!window.__eneroOK){d.classList.remove('js','con-intro');}},4500);})();
+</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Hotel","name":"Pousada Enero","description":"{{desc}}","url":"{{SITE}}/","image":"{{SITE}}/img/og.jpg","telephone":"+55 82 98899-3364","email":"pousadaenero.reservas@gmail.com","address":{"@type":"PostalAddress","streetAddress":"Av. Senador Rui Palmeira, 2190","addressLocality":"Maragogi","addressRegion":"AL","addressCountry":"BR"},"geo":{"@type":"GeoCoordinates","latitude":-9.012,"longitude":-35.220989},"checkinTime":"14:00","checkoutTime":"12:00","petsAllowed":true,"numberOfRooms":28,"aggregateRating":{"@type":"AggregateRating","ratingValue":"9.4","bestRating":"10","reviewCount":"1747"},"sameAs":["https://www.instagram.com/eneromaragogi/"]}</script>
+</head>
+<body>
+<a class="skip" href="#conteudo">{{skip}}</a>
+
+<div class="intro" aria-hidden="true">
+  <div class="intro__stage">{{INTRO_SVG}}</div>
+  <svg class="intro__edge" viewBox="0 0 1440 120" preserveAspectRatio="none" aria-hidden="true"><path d="M0 0H1440V40C1180 120 960 10 720 60C480 110 240 20 0 80Z"/></svg>
+</div>
+
+<header class="top" id="top">
+  <div class="top__in">
+    <a class="top__logo" href="{{path}}" aria-label="Pousada Enero"><img src="/img/logo-color.svg" alt="Pousada Enero Maragogi" width="56" height="56"></a>
+    <nav class="top__nav" aria-label="Menu">
+      <a href="#suites">{{nav_suites}}</a><a href="#pousada">{{nav_pousada}}</a><a href="#cafe">{{nav_cafe}}</a><a href="#restaurante">{{nav_rest}}</a><a href="#passeios">{{nav_passeios}}</a>
+    </nav>
+    <div class="top__right">
+      <div class="langs">{{LANGS}}</div>
+      <a class="btn btn--sol top__book" href="{{MOTOR}}" target="_blank" rel="noopener" data-book>{{reservar_short}}</a>
+      <button class="burger" type="button" aria-expanded="false" aria-controls="menu" aria-label="{{menu_open}}" data-label-open="{{menu_open}}" data-label-close="{{menu_close}}"><span></span><span></span></button>
+    </div>
+  </div>
+</header>
+
+<div class="menu" id="menu" hidden>
+  <nav class="menu__nav" aria-label="Menu">
+    <a href="#suites">{{nav_suites}}</a><a href="#pousada">{{nav_pousada}}</a><a href="#cafe">{{nav_cafe}}</a><a href="#restaurante">{{nav_rest}}</a><a href="#passeios">{{nav_passeios}}</a><a href="#chegar">{{nav_chegar}}</a>
+  </nav>
+  <div class="menu__foot"><div class="langs langs--big">{{LANGS}}</div><img src="/img/trazo-ola.svg" alt="" width="160" height="24"></div>
+</div>
+
+<main id="conteudo">
+
+<section class="hero" aria-labelledby="hero-t">
+  <svg class="defs" width="0" height="0" aria-hidden="true"><defs>
+    <clipPath id="velaR" clipPathUnits="objectBoundingBox"><path d="M1,1 L0.94,0 C0.55,0.18 0.12,0.58 0,1 Z"/></clipPath>
+    <clipPath id="velaL" clipPathUnits="objectBoundingBox"><path d="M0,1 L0.06,0 C0.46,0.2 0.9,0.6 1,1 Z"/></clipPath>
+  </defs></svg>
+  <div class="hero__txt">
+    <p class="eyebrow rv" style="--d:1">{{hero_eyebrow}}</p>
+    <h1 id="hero-t" class="hero__t"><span class="ln"><span style="--d:2">{{hero_t1}}</span></span><span class="ln"><em style="--d:3">{{hero_t2}}</em></span></h1>
+    <img class="ola rv" style="--d:4" src="/img/trazo-ola.svg" alt="" width="200" height="30">
+    <p class="hero__p rv" style="--d:5">{{hero_p}}</p>
+    <div class="hero__cta rv" style="--d:6">
+      <a class="btn btn--azul btn--lg" href="{{MOTOR}}" target="_blank" rel="noopener" data-book>{{reservar_cta}}</a>
+      <a class="btn btn--line btn--lg" href="#suites">{{ver_suites}}</a>
+    </div>
+    <div class="badges rv" style="--d:7">
+      <a class="badge" href="{{booking_url}}" target="_blank" rel="noopener"><span class="badge__n badge__n--azul">9,4</span><span class="badge__bk"><img src="/img/booking.svg" alt="Booking.com" width="96" height="16"><span><strong>{{av_fant}}</strong> · {{b_reviews}}</span></span></a>
+      <a class="badge" href="#direto"><span class="badge__n badge__n--sol">17%<small>OFF</small></span><span><strong>{{b_direct}}</strong><br>{{b_site}}</span></a>
+    </div>
+  </div>
+  <div class="hero__media">
+    <picture class="hero__pic">
+      <source media="(min-width: 900px)" srcset="/img/hero-desk-960.webp 960w, /img/hero-desk-1600.webp 1600w" sizes="60vw">
+      <img src="/img/hero-celu-600.webp" srcset="/img/hero-celu-600.webp 600w, /img/hero-celu-900.webp 900w" sizes="100vw" width="900" height="1125" alt="{{hero_alt_celu}}" fetchpriority="high" decoding="async" data-alt-desk="{{hero_alt_desk}}">
+    </picture>
+    <a class="sello" href="{{booking_url}}" target="_blank" rel="noopener" aria-label="9,4 Booking · {{b_reviews}}"><img class="sello__ring" src="/img/horizonte.svg" alt="" width="160" height="160"><span class="sello__n">9,4</span><img class="sello__bk" src="/img/booking.svg" alt="Booking.com" width="74" height="13"></a>
+  </div>
+</section>
+
+<section class="direto" id="direto" aria-labelledby="direto-t">
+  <div class="wrap direto__grid">
+    <div class="direto__big rv"><span class="direto__pct">17%<small>OFF</small></span><span class="hand hand--claro">{{rd_big}}</span></div>
+    <div class="direto__info">
+      <h2 id="direto-t" class="h2 h2--claro rv">{{rd_t}}</h2>
+      <ul class="direto__list">
+        <li class="rv" style="--d:1"><strong>{{rd_1t}}</strong><span>{{rd_1p}}</span></li>
+        <li class="rv" style="--d:2"><strong>{{rd_2t}}</strong><span>{{rd_2p}}</span></li>
+        <li class="rv" style="--d:3"><strong>{{rd_3t}}</strong><span>{{rd_3p}}</span></li>
+      </ul>
+    </div>
+    <form class="fechas rv" style="--d:2" data-fechas novalidate>
+      <div class="fechas__row">
+        <button type="button" class="campo" data-cal-open="in" aria-haspopup="dialog"><span>{{rd_in}}</span><b data-cal-v="in">{{js_pick}}</b></button>
+        <button type="button" class="campo" data-cal-open="out" aria-haspopup="dialog"><span>{{rd_out}}</span><b data-cal-v="out">{{js_pick}}</b></button>
+      </div>
+      <div class="cal" data-cal hidden role="dialog" aria-label="{{rd_in}} / {{rd_out}}">
+        <div class="cal__head"><p class="cal__hint" data-cal-hint>{{js_cal_in}}</p><button type="button" class="x cal__x" data-cal-close aria-label="{{js_close}}">×</button></div>
+        <div class="cal__nav"><button type="button" class="arrow" data-cal-nav="-1" aria-label="{{js_prev_m}}">←</button><button type="button" class="arrow" data-cal-nav="1" aria-label="{{js_next_m}}">→</button></div>
+        <div class="cal__months" data-cal-months></div>
+      </div>
+      <button class="btn btn--sol btn--lg btn--full" type="submit">{{rd_btn}}</button>
+      <p class="fechas__err" role="alert" hidden></p>
+      <p class="fechas__note">{{rd_note}}</p>
+    </form>
+  </div>
+</section>
+
+<section class="pousada" id="pousada" aria-labelledby="pousada-t">
+  <div class="wrap pousada__grid">
+    <div class="pousada__txt">
+      <p class="eyebrow rv">{{po_eyebrow}}</p>
+      <h2 id="pousada-t" class="h2 rv">{{po_t}}</h2>
+      <img class="ola rv" src="/img/trazo-ola.svg" alt="" width="170" height="26">
+      <p class="lead rv">{{po_p}}</p>
+      <ul class="facts">
+        <li class="rv" style="--d:1"><span class="facts__n">28</span>{{po_f1}}</li>
+        <li class="rv" style="--d:2"><img src="/img/icons/icono-praia.svg" alt="" width="40" height="40">{{po_f2}}</li>
+        <li class="rv" style="--d:3"><img src="/img/icons/icono-pet.svg" alt="" width="40" height="40">{{po_f3}}</li>
+        <li class="rv" style="--d:4"><img src="/img/icons/icono-restaurante.svg" alt="" width="40" height="40">{{po_f4}}</li>
+      </ul>
+      <p class="hand rv">{{po_note}}</p>
+    </div>
+    <div class="mosaic">
+      <figure class="mosaic__a reveal"><img src="/img/puerta-quiosco-900.webp" srcset="/img/puerta-quiosco-900.webp 900w, /img/puerta-quiosco-1600.webp 1600w" sizes="(min-width: 900px) 34vw, 90vw" width="1600" height="1067" alt="{{po_alt1}}" loading="lazy" decoding="async"></figure>
+      <figure class="mosaic__b reveal"><img src="/img/suite-detalle-600.webp" srcset="/img/suite-detalle-600.webp 600w, /img/suite-detalle-900.webp 900w" sizes="(min-width: 900px) 20vw, 45vw" width="900" height="921" alt="{{po_alt2}}" loading="lazy" decoding="async"></figure>
+      <figure class="mosaic__c reveal vela"><img src="/img/reposeras-600.webp" srcset="/img/reposeras-600.webp 600w, /img/reposeras-1000.webp 1000w" sizes="(min-width: 900px) 20vw, 45vw" width="1000" height="1250" alt="{{po_alt3}}" loading="lazy" decoding="async"></figure>
+    </div>
+  </div>
+</section>
+
+<section class="mapa" id="mapa" aria-labelledby="mapa-t">
+  <div class="wrap">
+    <div class="sec-head">
+      <div><p class="eyebrow rv">{{map_eyebrow}}</p><h2 id="mapa-t" class="h2 rv">{{map_t}}</h2></div>
+      <p class="hand rv"><span class="only-d">{{map_hint_d}}</span><span class="only-m">{{map_hint_m}}</span> ↓</p>
+    </div>
+    <div class="mapa__grid">
+      <div class="mapa__stage rv" data-map-stage>
+        <div class="mapa__layer" data-map-layer>
+          <svg viewBox="0 0 1100 940" width="1100" height="940" aria-hidden="true" data-map-svg>
+            <defs><mask id="mapaMask"><rect width="1100" height="940" fill="#fff"/><g fill="#000" data-map-holes></g></mask></defs>
+            <image href="/img/mapa-sat-1100.webp" width="1100" height="940" preserveAspectRatio="none"/>
+            <rect class="mapa__dim" width="1100" height="940" mask="url(#mapaMask)"/>
+            <path class="mapa__route" d="M659 746 L659 862"/>
+            <g data-map-frames></g>
+          </svg>
+        </div>
+        <div class="mapa__marks" data-map-marks></div>
+        <div class="mapa__compass" aria-hidden="true"><svg viewBox="0 0 14 20" width="12" height="18" fill="currentColor"><path d="M7 0 L13 20 L7 15 L1 20Z"/></svg>N</div>
+        <div class="mapa__ctrl">
+          <button type="button" data-map-zoom="1.5" aria-label="{{js_zoom_in}}">+</button>
+          <button type="button" data-map-zoom="0.6667" aria-label="{{js_zoom_out}}">−</button>
+          <button type="button" data-map-fit aria-label="{{js_map_all}}"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg></button>
+        </div>
+        <p class="mapa__attr">Imagem © Google</p>
+      </div>
+      <aside class="zona-panel" aria-live="polite" data-zona-panel></aside>
+    </div>
+  </div>
+  <template id="zona-data">{{ZONAS}}</template>
+</section>
+
+<section class="suites" id="suites" aria-labelledby="suites-t">
+  <div class="wrap">
+    <div class="sec-head">
+      <div><p class="eyebrow rv">{{su_eyebrow}}</p><h2 id="suites-t" class="h2 rv">{{su_t}}</h2><img class="ola rv" src="/img/trazo-ola.svg" alt="" width="170" height="26"></div>
+      <a class="link rv" href="#mapa">{{su_map}} →</a>
+    </div>
+    <div class="chips" role="toolbar" aria-label="Filtros" data-filtros>
+      <button type="button" class="chip is-on" data-f="all" aria-pressed="true">{{f_all}}</button>
+      <button type="button" class="chip" data-f="mar" aria-pressed="false">{{f_mar}}</button>
+      <button type="button" class="chip" data-f="sacada" aria-pressed="false">{{f_sacada}}</button>
+      <button type="button" class="chip" data-f="terrea" aria-pressed="false">{{f_terrea}}</button>
+      <button type="button" class="chip" data-f="tres" aria-pressed="false">{{f_tres}}</button>
+    </div>
+    <div class="cards" data-cards></div>
+    <p class="cards__none" hidden>{{js_none}}</p>
+  </div>
+</section>
+
+<section class="vistamar" id="vista-mar" aria-labelledby="vm-t">
+  <div class="vistamar__frame">
+    <picture>
+      <source media="(min-width: 900px)" srcset="/img/puerta-quiosco-1600.webp">
+      <img src="/img/puerta-quiosco-900.webp" width="1600" height="1067" alt="{{vm_alt}}" loading="lazy" decoding="async">
+    </picture>
+    <div class="vistamar__card">
+      <p class="eyebrow">{{vm_eyebrow}}</p>
+      <h2 id="vm-t" class="h2"><span>{{vm_t1}}</span><br><em>{{vm_t2}}</em></h2>
+      <img class="ola" src="/img/trazo-ola.svg" alt="" width="150" height="22">
+      <ul class="vm-list" data-vm-list></ul>
+      <a class="btn btn--azul" href="#suites" data-ver-mar>{{vm_btn}}</a>
+    </div>
+  </div>
+</section>
+
+<section class="cafe" id="cafe" aria-labelledby="cafe-t">
+  <div class="wrap">
+    <div class="sec-head">
+      <div><p class="eyebrow rv">{{ca_eyebrow}}</p><h2 id="cafe-t" class="h2 rv">{{ca_t}}</h2></div>
+      <p class="hand rv">{{po_note}}</p>
+    </div>
+  </div>
+  <div class="navega" aria-hidden="true" data-navega>
+    <svg class="navega__mar" viewBox="0 0 1440 40" preserveAspectRatio="none"><path d="M0 22 C120 8 240 36 360 22 C480 8 600 36 720 22 C840 8 960 36 1080 22 C1200 8 1320 36 1440 22"/><path class="navega__mar2" d="M0 30 C120 18 240 42 360 30 C480 18 600 42 720 30 C840 18 960 42 1080 30 C1200 18 1320 42 1440 30"/></svg>
+    <img class="navega__boat" src="/img/barquito.svg" alt="" width="54" height="64">
+  </div>
+  <div class="wrap">
+    <ol class="pasos" data-drag>
+      <li class="paso rv" style="--d:1"><figure class="paso__fig"><img src="/img/mesa-picnic-600.webp" srcset="/img/mesa-picnic-600.webp 600w, /img/mesa-picnic-900.webp 900w" sizes="(min-width: 900px) 30vw, 80vw" width="900" height="900" alt="{{ca_alt1}}" loading="lazy" decoding="async"></figure><span class="paso__n">01</span><h3>{{ca_1t}}</h3><p>{{ca_1p}}</p></li>
+      <li class="paso rv" style="--d:2"><figure class="paso__fig"><img src="/img/cesta-girasoles-600.webp" srcset="/img/cesta-girasoles-600.webp 600w, /img/cesta-girasoles-900.webp 900w" sizes="(min-width: 900px) 30vw, 80vw" width="900" height="900" alt="{{ca_alt2}}" loading="lazy" decoding="async"></figure><span class="paso__n">02</span><h3>{{ca_2t}}</h3><p>{{ca_2p}}</p></li>
+      <li class="paso rv" style="--d:3"><figure class="paso__fig"><img src="/img/bandeja-700.webp" srcset="/img/bandeja-700.webp 700w, /img/bandeja-1200.webp 1200w" sizes="(min-width: 900px) 30vw, 80vw" width="1200" height="800" alt="{{ca_alt3}}" loading="lazy" decoding="async"></figure><span class="paso__n">03</span><h3>{{ca_3t}}</h3><p>{{ca_3p}}</p></li>
+    </ol>
+  </div>
+</section>
+
+<section class="rest" id="restaurante" aria-labelledby="rest-t">
+  <div class="wrap rest__grid">
+    <div class="rest__txt">
+      <p class="eyebrow eyebrow--sol rv">{{re_eyebrow}}</p>
+      <h2 id="rest-t" class="h2 h2--claro rv">{{re_t}}</h2>
+      <img class="ola rv" src="/img/trazo-ola-claro.svg" alt="" width="170" height="26">
+      <p class="lead lead--claro rv">{{re_p}}</p>
+      <a class="btn btn--line-claro rv" href="{{WA_REST}}" target="_blank" rel="noopener">{{re_btn}}</a>
+    </div>
+    <div class="rest__fotos" data-drag>
+      <figure class="reveal"><img src="/img/rest-3-600.webp" srcset="/img/rest-3-600.webp 600w, /img/rest-3-900.webp 900w" sizes="(min-width: 900px) 18vw, 60vw" width="900" height="900" alt="{{re_alt1}}" loading="lazy" decoding="async"></figure>
+      <figure class="reveal"><img src="/img/rest-mesa-600.webp" srcset="/img/rest-mesa-600.webp 600w, /img/rest-mesa-900.webp 900w" sizes="(min-width: 900px) 18vw, 60vw" width="900" height="600" alt="{{re_alt2}}" loading="lazy" decoding="async"></figure>
+      <figure class="reveal"><img src="/img/rest-1-600.webp" sizes="(min-width: 900px) 18vw, 60vw" width="600" height="1068" alt="{{re_alt3}}" loading="lazy" decoding="async"></figure>
+      <figure class="reveal"><img src="/img/drink-600.webp" srcset="/img/drink-600.webp 600w, /img/drink-800.webp 800w" sizes="(min-width: 900px) 18vw, 60vw" width="800" height="1000" alt="{{re_alt4}}" loading="lazy" decoding="async"></figure>
+    </div>
+  </div>
+</section>
+
+<section class="passeios" id="passeios" aria-labelledby="pa-t">
+  <div class="wrap">
+    <div class="sec-head">
+      <div><h2 id="pa-t" class="h2 rv">{{pa_t}}</h2><p class="lead rv">{{pa_p}}</p></div>
+      <div class="arrows"><button type="button" class="arrow" data-scroll="-1" aria-label="{{pa_prev}}">←</button><button type="button" class="arrow" data-scroll="1" aria-label="{{pa_next}}">→</button></div>
+    </div>
+  </div>
+  <div class="rail" data-rail data-drag>
+    <article class="pcard"><img src="/img/aerea-600.webp" srcset="/img/aerea-600.webp 600w, /img/aerea-900.webp 900w" sizes="(min-width: 900px) 25vw, 78vw" width="900" height="900" alt="" loading="lazy" decoding="async"><h3>{{pa_1}}</h3><p>{{pa_1p}}</p></article>
+    <article class="pcard"><img src="/img/jangada-600.webp" srcset="/img/jangada-600.webp 600w, /img/jangada-900.webp 900w" sizes="(min-width: 900px) 25vw, 78vw" width="900" height="900" alt="" loading="lazy" decoding="async"><h3>{{pa_2}}</h3><p>{{pa_2p}}</p></article>
+    <article class="pcard"><img src="/img/catamara-600.webp" srcset="/img/catamara-600.webp 600w, /img/catamara-900.webp 900w" sizes="(min-width: 900px) 25vw, 78vw" width="900" height="900" alt="" loading="lazy" decoding="async"><h3>{{pa_3}}</h3><p>{{pa_3p}}</p></article>
+    <article class="pcard"><div class="pcard__ph"><img src="/img/icons/icono-praia.svg" alt="" width="72" height="72"></div><h3>{{pa_4}}</h3><p>{{pa_4p}}</p></article>
+  </div>
+</section>
+
+<section class="pet" aria-labelledby="pet-t">
+  <div class="wrap pet__grid">
+    <div class="pet__fotos">
+      <img class="pet__f pet__f--a reveal-img" src="/img/pet-gato-blanco-400.webp" srcset="/img/pet-gato-blanco-400.webp 400w, /img/pet-gato-blanco-640.webp 640w" sizes="(min-width: 900px) 240px, 44vw" width="640" height="800" alt="{{pet_alt}}" loading="lazy" decoding="async">
+      <img class="pet__f pet__f--b reveal-img" src="/img/pet-nega-400.webp" srcset="/img/pet-nega-400.webp 400w, /img/pet-nega-640.webp 640w" sizes="(min-width: 900px) 240px, 44vw" width="640" height="800" alt="{{pet_alt2}}" loading="lazy" decoding="async">
+    </div>
+    <div class="pet__txt"><img class="pet__icon" src="/img/icons/icono-pet.svg" alt="" width="56" height="56"><h2 id="pet-t" class="h2 rv">{{pet_t}}</h2><p class="lead rv">{{pet_p}}</p><p class="hand rv">{{pet_note}}</p></div>
+  </div>
+</section>
+
+<section class="aval" id="avaliacoes" aria-labelledby="av-t">
+  <div class="wrap aval__grid">
+    <div class="aval__score">
+      <p class="eyebrow rv">{{av_eyebrow}}</p>
+      <p id="av-t" class="aval__n rv" data-count="9.4">9,4</p>
+      <p class="rv"><strong>{{av_fant}}</strong> · {{av_on}}</p>
+      <a class="aval__bk rv" href="{{booking_url}}" target="_blank" rel="noopener"><img src="/img/booking.svg" alt="Booking.com" width="120" height="20"></a>
+      <ul class="subs">
+        <li><span>{{av_s1}}</span><i style="--w:96%"></i><b>9,6</b></li>
+        <li><span>{{av_s2}}</span><i style="--w:94%"></i><b>9,4</b></li>
+        <li><span>{{av_s3}}</span><i style="--w:93%"></i><b>9,3</b></li>
+        <li><span>{{av_s4}}</span><i style="--w:93%"></i><b>9,3</b></li>
+        <li><span>{{av_s5}}</span><i style="--w:92%"></i><b>9,2</b></li>
+        <li><span>{{av_s6}}</span><i style="--w:92%"></i><b>9,2</b></li>
+      </ul>
+    </div>
+    <div class="aval__quotes">
+      <div class="quotes" data-drag>
+        <blockquote class="quote rv" lang="es" style="--d:1"><p>«Poder tomar desayuno en la playa abajo de las palmeras es algo que ninguna pousada lo tiene.»</p><footer>Juan · Chile</footer></blockquote>
+        <blockquote class="quote rv" lang="es" style="--d:2"><p>«El restaurante es un mega plus que ofrecen, la comida es deliciosa, variada y con excelente precio.»</p><footer>Marcia · Uruguay</footer></blockquote>
+        <blockquote class="quote rv" lang="es" style="--d:3"><p>«La tranquilidad, el silencio, la maravillosa predisposición en la atención. Sin duda, volveríamos.»</p><footer>Beatriz · Argentina</footer></blockquote>
+      </div>
+      <p class="aval__orig">{{av_orig}} · <a href="{{booking_url}}" target="_blank" rel="noopener">{{av_more}} →</a></p>
+    </div>
+  </div>
+</section>
+
+<section class="chegar" id="chegar" aria-labelledby="ch-t">
+  <div class="wrap chegar__grid">
+    <div class="chegar__info">
+      <p class="eyebrow rv">{{ch_eyebrow}}</p>
+      <h2 id="ch-t" class="h2 rv">{{ch_t}}</h2>
+      <p class="lead rv">{{ch_addr}}<br>{{ch_near}}</p>
+      <a class="btn btn--line rv" href="https://www.google.com/maps/search/?api=1&amp;query=Pousada+Enero+Maragogi" target="_blank" rel="noopener"><img src="/img/icons/icono-mapa.svg" alt="" width="24" height="24">{{ch_map}}</a>
+      <img class="chegar__mares" src="/img/trazo-mares.svg" alt="" width="420" height="92" loading="lazy">
+    </div>
+    <div class="faq">
+      <h3 class="faq__t rv">{{faq_t}}</h3>
+      <details class="rv"><summary>{{q1}}</summary><div class="faq__a"><p>{{a1}}</p></div></details>
+      <details class="rv"><summary>{{q2}}</summary><div class="faq__a"><p>{{a2}}</p></div></details>
+      <details class="rv"><summary>{{q3}}</summary><div class="faq__a"><p>{{a3}}</p></div></details>
+      <details class="rv"><summary>{{q4}}</summary><div class="faq__a"><p>{{a4}}</p></div></details>
+      <details class="rv"><summary>{{q5}}</summary><div class="faq__a"><p>{{a5}}</p></div></details>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="foot">
+  <div class="wrap foot__grid">
+    <img src="/img/logo-claro.svg" alt="Pousada Enero Maragogi" width="120" height="120" loading="lazy">
+    <div><h3>{{ch_eyebrow}}</h3><p>Av. Senador Rui Palmeira, 2190<br>Maragogi · Alagoas</p><a class="foot__link" href="https://www.google.com/maps/search/?api=1&amp;query=Pousada+Enero+Maragogi" target="_blank" rel="noopener">{{ch_map}} →</a></div>
+    <div><h3>{{ft_contact}}</h3><p><a href="{{WA}}" target="_blank" rel="noopener">WhatsApp (82) 98899-3364</a><br><a href="mailto:pousadaenero.reservas@gmail.com">pousadaenero.reservas@gmail.com</a><br><a href="https://www.instagram.com/eneromaragogi/" target="_blank" rel="noopener">@eneromaragogi</a></p></div>
+    <div><h3>{{ft_good}}</h3><p>{{ft_g1}}<br>{{ft_g2}}<br>{{ft_g3}}</p></div>
+  </div>
+  <div class="wrap foot__bottom"><span>© Pousada Enero · <span class="langs langs--foot">{{LANGS}}</span></span><span class="credit">{{ft_credit}} <a href="https://alejomfernandez.com.ar" target="_blank" rel="noopener">Alejo Martín Fernández</a></span></div>
+</footer>
+
+<div class="bot" data-bot>
+  <button type="button" class="bot__fab" aria-expanded="false" aria-controls="bot-panel" data-bot-toggle><img src="/img/barquito.svg" alt="" width="30" height="36"><span class="bot__tip">{{bot_open}}</span><span class="sr">{{bot_open}}</span></button>
+  <div class="bot__panel" id="bot-panel" role="dialog" aria-label="{{bot_name}}" hidden>
+    <div class="bot__head"><span class="bot__av"><img src="/img/barquito.svg" alt="" width="26" height="30"></span><div><b>{{bot_name}}</b><small>{{bot_sub}}</small></div><button type="button" class="bot__x" data-bot-close aria-label="{{js_close}}">×</button></div>
+    <div class="bot__log" data-bot-log aria-live="polite"><div class="bot__msg">{{bot_hi}}</div></div>
+    <div class="bot__qs" data-bot-qs><button type="button" class="bot__q" data-q="1">{{bot_q1}}</button><button type="button" class="bot__q" data-q="2">{{bot_q2}}</button><button type="button" class="bot__q" data-q="3">{{bot_q3}}</button><button type="button" class="bot__q" data-q="4">{{bot_q4}}</button><button type="button" class="bot__q" data-q="5">{{bot_q5}}</button><button type="button" class="bot__q" data-q="6">{{bot_q6}}</button><button type="button" class="bot__q" data-q="7">{{bot_q7}}</button><button type="button" class="bot__q" data-q="8">{{bot_q8}}</button><button type="button" class="bot__q" data-q="9">{{bot_q9}}</button><button type="button" class="bot__q" data-q="10">{{bot_q10}}</button></div>
+    <template data-a="1"><p>{{a1}}</p></template><template data-a="2"><p>{{a2}}</p></template><template data-a="3"><p>{{a3}}</p></template><template data-a="4"><p>{{a4}}</p></template><template data-a="5"><p>{{a5}}</p></template><template data-a="6"><p>{{bot_a6}}</p><a class="bot__btn" href="{{MOTOR}}" target="_blank" rel="noopener" data-book>{{bot_book}}</a></template><template data-a="7"><p>{{bot_a7}}</p><a class="bot__btn bot__btn--line" href="https://www.google.com/maps/search/?api=1&amp;query=Pousada+Enero+Maragogi" target="_blank" rel="noopener">{{bot_maps}} →</a></template><template data-a="8"><p>{{bot_a8}}</p><a class="bot__btn bot__btn--line" href="{{WA_REST}}" target="_blank" rel="noopener">{{re_btn}}</a></template><template data-a="9"><p>{{bot_a9}}</p><a class="bot__btn bot__btn--line" href="{{WA}}" target="_blank" rel="noopener">{{wa_label}}</a></template><template data-a="10"><p>{{bot_human}}</p><a class="bot__btn" href="{{WA}}" target="_blank" rel="noopener">{{wa_label}}</a></template>
+    <template data-more><div class="bot__msg">{{bot_more}}</div></template>
+  </div>
+</div>
+
+<div class="barra" data-barra>
+  <a class="btn btn--azul btn--full" href="{{MOTOR}}" target="_blank" rel="noopener" data-book>{{reservar_cta}}</a>
+  <a class="barra__wa" href="{{WA}}" target="_blank" rel="noopener" aria-label="{{wa_label}}"><svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2c-1.5 0-3-.4-4.3-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8s-.4-.1-.6.1-.7.8-.8 1-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.3-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2c0 1.3.9 2.5 1 2.7s1.8 2.8 4.4 3.9c1.6.7 2.3.8 3.1.6.5-.1 1.5-.6 1.7-1.2s.2-1.1.2-1.2-.2-.2-.4-.3z"/></svg></a>
+</div>
+
+<div class="drawer" data-drawer hidden>
+  <div class="drawer__bg" data-close></div>
+  <div class="drawer__panel" role="dialog" aria-modal="true" aria-labelledby="dr-t" tabindex="-1">
+    <button class="x drawer__x" type="button" aria-label="{{js_close}}" data-close>×</button>
+    <div class="drawer__body" data-drawer-body></div>
+  </div>
+</div>
+
+<script>window.ENERO={lang:"{{htmllang}}",motor:"{{MOTOR}}",t:{{JS_T}}};</script>
+<script src="/js/data.js?v={{V}}" defer></script>
+<script src="/js/main.js?v={{V}}" defer></script>
+</body>
+</html>

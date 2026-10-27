@@ -42,7 +42,7 @@
     var el = $('.intro');
     if (!root.classList.contains('con-intro') || !el) { heroIn(); return; }
     var t0 = performance.now();
-    var minT = desk.matches ? 2000 : 1500;
+    var minT = desk.matches ? 2150 : 1600;
     el.classList.add('go');
     var waits = [];
     if (document.fonts && document.fonts.ready) waits.push(document.fonts.ready);
@@ -67,7 +67,7 @@
   })();
 
   /* ---------- header, barra, nav activa ---------- */
-  var top = $('.top'), barra = $('[data-barra]'), waf = $('.wa-float');
+  var top = $('.top'), barra = $('[data-barra]'), waf = $('.wa-float'), bot = $('[data-bot]');
   var ticking = false;
   function onScroll() {
     ticking = false;
@@ -77,6 +77,7 @@
     var show = y > limit;
     if (barra) barra.classList.toggle('is-on', show);
     if (waf) waf.classList.toggle('is-on', show);
+    if (bot) bot.classList.toggle('is-on', show || bot.classList.contains('is-open'));
   }
   addEventListener('scroll', function () { if (!ticking) { ticking = true; requestAnimationFrame(onScroll); } }, { passive: true });
   onScroll();
@@ -290,50 +291,153 @@
   var verMar = $('[data-ver-mar]');
   if (verMar) verMar.addEventListener('click', function () { setFilter('mar'); });
 
-  /* ---------- mapa ---------- */
-  var panel = $('[data-zona-panel]'), zonas = [];
+  /* ---------- mapa satelital ---------- */
+  var panel = $('[data-zona-panel]'), stage = $('[data-map-stage]'), zonas = [];
   try { zonas = JSON.parse($('#zona-data').content.textContent); } catch (e) { try { zonas = JSON.parse($('#zona-data').textContent); } catch (e2) {} }
   var zById = {}; zonas.forEach(function (z, i) { z.n = i + 1; zById[z.id] = z; });
-  function selectZona(id, scroll) {
-    var z = zById[id]; if (!z || !panel) return;
-    $$('.zona').forEach(function (g) { var on = g.dataset.zona === id; g.classList.toggle('is-on', on); g.setAttribute('aria-pressed', String(on)); });
-    $$('[data-zona-btn]').forEach(function (b) { var on = b.dataset.zonaBtn === id; b.classList.toggle('is-on', on); b.setAttribute('aria-pressed', String(on)); });
-    var cats = (z.cats || []).map(function (k) { return byId[k]; }).filter(Boolean);
-    var src = z.img ? '/img/' + z.img : (cats[0] && cats[0].img[0] ? img(cats[0].img[0].f, 800) : '');
-    var html = '<div class="js-in">' +
-      (src ? '<img class="zona-panel__img" src="' + src + '" alt="" width="800" height="500" loading="lazy" decoding="async">' : '') +
-      '</div><div class="js-in" style="display:flex;flex-direction:column;gap:10px">' +
-      '<p class="zona-panel__k">' + z.n + '</p><h3 class="zona-panel__n">' + esc(z.name) + '</h3>' +
-      '<p class="zona-panel__p">' + esc(z.p) + '</p>' +
-      (cats.length ? '<ul class="zona-panel__list">' + cats.map(function (c) { return '<li><button type="button" data-suite="' + c.id + '"><strong>' + esc(c.name) + '</strong><span>' + esc(meta(c)) + ' →</span></button></li>'; }).join('') + '</ul>' : '') +
-      '</div>';
-    $('.zona-panel__body', panel).innerHTML = html;
-    if (scroll && !desk.matches) {
-      var r = panel.getBoundingClientRect();
-      if (r.top > innerHeight * 0.55 || r.bottom < 0) panel.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' });
+  if (stage && panel && zonas.length) (function () {
+    var layer = $('[data-map-layer]'), marksEl = $('[data-map-marks]'), frames = $('[data-map-frames]'), holes = $('[data-map-holes]');
+    var W = 1100, H = 940, ALL = [440, 250, 440, 680];
+    var sc = 1, tx = 0, ty = 0, anim = 0, cur = null, mk = {};
+    var NS = 'http://www.w3.org/2000/svg';
+    zonas.forEach(function (z) {
+      var r = document.createElementNS(NS, 'rect');
+      r.setAttribute('x', z.b[0]); r.setAttribute('y', z.b[1]); r.setAttribute('width', z.b[2]); r.setAttribute('height', z.b[3]);
+      if (!z.pt) holes.appendChild(r.cloneNode());
+      var g = document.createElementNS(NS, 'g'); g.setAttribute('class', 'mapa__frame' + (z.pt ? ' is-sea' : '')); g.dataset.id = z.id;
+      r.setAttribute('class', 'mapa__hit'); if (z.pt) { r.setAttribute('rx', 60); }
+      g.appendChild(r); frames.appendChild(g);
+      var b = document.createElement('button'); b.type = 'button'; b.className = 'mapa__mk' + (z.pt ? ' is-sea' : '');
+      b.innerHTML = '<b>' + z.n + '</b><span>' + esc(z.name) + '</span>'; b.setAttribute('aria-label', z.name); b.dataset.id = z.id;
+      marksEl.appendChild(b); mk[z.id] = b;
+    });
+    function anchor(z) { return z.pt || [z.b[0] + 12, z.b[1] + 12]; }
+    function minS() { return Math.max(stage.clientWidth / W, stage.clientHeight / H); }
+    function maxS() { return Math.max(minS() * 1.4, 2.4); }
+    function clampV() {
+      sc = Math.min(Math.max(sc, minS()), maxS());
+      tx = Math.min(0, Math.max(stage.clientWidth - W * sc, tx));
+      ty = Math.min(0, Math.max(stage.clientHeight - H * sc, ty));
     }
-  }
-  $$('.zona').forEach(function (g) {
-    g.addEventListener('click', function () { selectZona(g.dataset.zona, true); });
-    g.addEventListener('keydown', function (e) { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); selectZona(g.dataset.zona, true); } });
-  });
-  $$('[data-zona-btn]').forEach(function (b) { b.addEventListener('click', function () { selectZona(b.dataset.zonaBtn, true); }); });
-  if (zonas.length) selectZona('posada', false);
+    function render() {
+      clampV();
+      layer.style.transform = 'translate(' + tx + 'px,' + ty + 'px) scale(' + sc + ')';
+      zonas.forEach(function (z) { var p = anchor(z); mk[z.id].style.transform = 'translate(' + (tx + p[0] * sc - 13) + 'px,' + (ty + p[1] * sc - 13) + 'px)'; });
+      stage.classList.toggle('is-wide', sc > 1.5);
+    }
+    function target(box, pad) {
+      var sw = stage.clientWidth, sh = stage.clientHeight, ns = Math.min(sw / (box[2] + pad * 2), sh / (box[3] + pad * 2));
+      ns = Math.min(Math.max(ns, minS()), maxS());
+      return { s: ns, tx: sw / 2 - (box[0] + box[2] / 2) * ns, ty: sh / 2 - (box[1] + box[3] / 2) * ns };
+    }
+    function fly(t) {
+      cancelAnimationFrame(anim);
+      if (reduce) { sc = t.s; tx = t.tx; ty = t.ty; render(); return; }
+      var a = { s: sc, tx: tx, ty: ty }, t0 = performance.now(), dur = 750;
+      (function step(now) {
+        var k = Math.min(1, (now - t0) / dur); k = k < .5 ? 4 * k * k * k : 1 - Math.pow(-2 * k + 2, 3) / 2;
+        sc = a.s + (t.s - a.s) * k; tx = a.tx + (t.tx - a.tx) * k; ty = a.ty + (t.ty - a.ty) * k; render();
+        if (k < 1) anim = requestAnimationFrame(step);
+      })(t0);
+    }
+    function mark(id) {
+      $$('.mapa__frame', frames).forEach(function (g) { g.classList.toggle('is-on', g.dataset.id === id); });
+      Object.keys(mk).forEach(function (k) { mk[k].classList.toggle('is-on', k === id); mk[k].setAttribute('aria-pressed', String(k === id)); });
+      stage.classList.toggle('has-sel', !!id);
+    }
+    function count(z) { return (z.cats || []).reduce(function (a, k) { var c = byId[k]; return a + (c && c.rooms ? c.rooms.length : 0); }, 0); }
+    function sub(z) { var n = count(z); return n ? tr('sub_casa', n) : (z.id === 'restaurante' ? T.sub_rest : T.sub_praia); }
+    function zoneImg(z) { var cats = (z.cats || []).map(function (k) { return byId[k]; }).filter(Boolean); return z.img ? '/img/' + z.img : (cats[0] ? img(cats[0].img[0].f, 800) : ''); }
+    function index() {
+      cur = null; mark(null);
+      panel.innerHTML = '<div class="zp js-in"><p class="zp__k">' + esc(T.map_kicker) + '</p><h3 class="zp__t">' + esc(T.map_t) + '</h3><p class="zp__p">' + esc(T.map_p) + '</p>' +
+        '<ul class="zp__list">' + zonas.map(function (z) {
+          return '<li><button type="button" class="zp__row" data-zona="' + z.id + '"><span class="zp__n">' + z.n + '</span><span class="zp__nm">' + esc(z.name) + '</span><small>' + esc(sub(z)) + '</small><i aria-hidden="true">→</i></button></li>';
+        }).join('') + '</ul></div>';
+    }
+    function open(id, fromMap) {
+      var z = zById[id]; if (!z) return; cur = id; mark(id);
+      var cats = (z.cats || []).map(function (k) { return byId[k]; }).filter(Boolean);
+      var src = zoneImg(z);
+      panel.innerHTML = '<div class="zp js-in">' +
+        '<button type="button" class="zp__back" data-map-back>← ' + esc(T.map_back) + '</button>' +
+        '<div class="zp__fig"><img data-zp-img src="' + src + '" alt="" width="800" height="500" decoding="async"><img data-zp-img2 alt="" width="800" height="500" decoding="async"></div>' +
+        '<p class="zp__k">' + z.n + ' · ' + esc(sub(z)) + '</p><h3 class="zp__t">' + esc(z.name) + '</h3><p class="zp__p">' + esc(z.p) + '</p>' +
+        (cats.length ? '<ul class="zp__rooms">' + cats.map(function (c) {
+          return '<li><button type="button" class="zp__room" data-suite="' + c.id + '" data-cover="' + img(c.img[0].f, 800) + '"><img src="' + img(c.img[0].f, 480) + '" alt="" width="64" height="48" loading="lazy" decoding="async"><span><strong>' + esc(c.name) + '</strong><small>' + esc(meta(c)) + '</small></span><i aria-hidden="true">→</i></button></li>';
+        }).join('') + '</ul>' : '') +
+        (z.id === 'restaurante' ? '<a class="btn btn--azul zp__cta" href="#restaurante">' + esc($('#restaurante h2') ? $('#restaurante h2').textContent : '') + ' →</a>' : '') +
+        (z.id === 'praia' ? '<a class="btn btn--azul zp__cta" href="#passeios">' + esc($('#passeios h2') ? $('#passeios h2').textContent : '') + ' →</a>' : '') +
+      '</div>';
+      panel.scrollTop = 0;
+      fly(target(z.b, z.pt ? 70 : 150));
+      if (fromMap && !desk.matches) {
+        var r = panel.getBoundingClientRect();
+        if (r.top > innerHeight * 0.7) panel.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' });
+      }
+    }
+    // preview de portada al pasar por una suíte
+    var prevT = 0;
+    panel.addEventListener('mouseover', function (e) {
+      var b = e.target.closest('.zp__room'); var i1 = $('[data-zp-img]', panel), i2 = $('[data-zp-img2]', panel); if (!i1) return;
+      clearTimeout(prevT);
+      if (b) { i2.src = b.dataset.cover; i2.classList.add('is-on'); }
+    });
+    panel.addEventListener('mouseout', function (e) {
+      var b = e.target.closest('.zp__room'); if (!b || b.contains(e.relatedTarget)) return;
+      var i2 = $('[data-zp-img2]', panel); prevT = setTimeout(function () { if (i2) i2.classList.remove('is-on'); }, 120);
+    });
+    panel.addEventListener('focusin', function (e) { var b = e.target.closest('.zp__room'), i2 = $('[data-zp-img2]', panel); if (b && i2) { i2.src = b.dataset.cover; i2.classList.add('is-on'); } });
+    panel.addEventListener('click', function (e) {
+      var r = e.target.closest('[data-zona]'); if (r) { open(r.dataset.zona); return; }
+      if (e.target.closest('[data-map-back]')) { index(); fly(target(ALL, 10)); }
+    });
+    marksEl.addEventListener('click', function (e) { var b = e.target.closest('.mapa__mk'); if (b) open(b.dataset.id, true); });
+    frames.addEventListener('click', function (e) { var g = e.target.closest('.mapa__frame'); if (g && !moved) open(g.dataset.id, true); });
+    frames.addEventListener('mouseover', function (e) { var g = e.target.closest('.mapa__frame'); Object.keys(mk).forEach(function (k) { mk[k].classList.toggle('is-hover', !!g && g.dataset.id === k); }); });
+    frames.addEventListener('mouseleave', function () { Object.keys(mk).forEach(function (k) { mk[k].classList.remove('is-hover'); }); });
+    // pan con mouse (en touch se deja el scroll de la página)
+    var moved = false, last = null;
+    stage.addEventListener('pointerdown', function (e) {
+      if (e.pointerType !== 'mouse' || e.button !== 0 || e.target.closest('.mapa__ctrl,.mapa__mk')) return;
+      cancelAnimationFrame(anim); last = { x: e.clientX, y: e.clientY }; moved = false;
+    });
+    addEventListener('pointermove', function (e) {
+      if (!last) return;
+      var dx = e.clientX - last.x, dy = e.clientY - last.y;
+      if (!moved && Math.hypot(dx, dy) < 5) return;
+      if (!moved) { moved = true; stage.classList.add('is-drag'); }
+      tx += dx; ty += dy; last = { x: e.clientX, y: e.clientY }; render();
+    });
+    addEventListener('pointerup', function () { if (!last) return; last = null; stage.classList.remove('is-drag'); setTimeout(function () { moved = false; }, 0); });
+    stage.addEventListener('wheel', function (e) {
+      if (!(e.ctrlKey || e.metaKey)) return;
+      e.preventDefault(); cancelAnimationFrame(anim);
+      var r = stage.getBoundingClientRect(), f = Math.exp(-e.deltaY * 0.0016), cx = e.clientX - r.left, cy = e.clientY - r.top;
+      var ns = Math.min(Math.max(sc * f, minS()), maxS()); tx = cx - (cx - tx) * (ns / sc); ty = cy - (cy - ty) * (ns / sc); sc = ns; render();
+    }, { passive: false });
+    $$('[data-map-zoom]', stage).forEach(function (b) {
+      b.addEventListener('click', function () { var f = +b.dataset.mapZoom, cx = stage.clientWidth / 2, cy = stage.clientHeight / 2; fly({ s: sc * f, tx: cx - (cx - tx) * f, ty: cy - (cy - ty) * f }); });
+    });
+    $('[data-map-fit]', stage).addEventListener('click', function () { fly(target(cur ? zById[cur].b : ALL, cur ? 150 : 10)); });
+    index();
+    var t0 = target(ALL, 10); sc = t0.s; tx = t0.tx; ty = t0.ty; render();
+    if ('ResizeObserver' in window) new ResizeObserver(function () { render(); }).observe(stage);
+  })();
 
-  /* ---------- café: pasos con foto fija ---------- */
-  var pasos = $$('[data-step]');
-  if (pasos.length && 'IntersectionObserver' in window) {
-    var figs = $$('[data-step-fig]');
-    pasos[0].classList.add('is-on');
-    var ioStep = new IntersectionObserver(function (es) {
-      es.forEach(function (e) {
-        if (!e.isIntersecting) return;
-        var n = e.target.dataset.step;
-        pasos.forEach(function (p) { p.classList.toggle('is-on', p === e.target); });
-        figs.forEach(function (f) { f.classList.toggle('is-on', f.dataset.stepFig === n); });
-      });
-    }, { rootMargin: '-45% 0px -45% 0px' });
-    pasos.forEach(function (p) { ioStep.observe(p); });
+  /* ---------- café: barquito que navega con el scroll ---------- */
+  var nav = $('[data-navega]');
+  if (nav && !reduce) {
+    var boat = $('.navega__boat', nav), nTick = false;
+    var upd = function () {
+      nTick = false;
+      var r = nav.getBoundingClientRect(), vh = innerHeight;
+      if (r.bottom < -200 || r.top > vh + 200) return;
+      var p = Math.min(1, Math.max(0, (vh - r.top) / (vh + r.height)));
+      boat.style.setProperty('--bx', (p * (nav.clientWidth - 70)) + 'px');
+    };
+    addEventListener('scroll', function () { if (!nTick) { nTick = true; requestAnimationFrame(upd); } }, { passive: true });
+    upd();
   }
 
   /* ---------- drag con mouse + flechas ---------- */
@@ -374,36 +478,166 @@
     });
   });
 
-  /* ---------- fechas → motor ---------- */
+  /* ---------- fechas → motor (calendario de rango) ---------- */
   var form = $('[data-fechas]');
   if (form) {
-    var fin = form.elements['in'], fout = form.elements['out'], err = $('.fechas__err', form);
+    var cal = $('[data-cal]', form), months = $('[data-cal-months]', form), hint = $('[data-cal-hint]', form), err = $('.fechas__err', form);
+    var vIn = $('[data-cal-v="in"]', form), vOut = $('[data-cal-v="out"]', form);
+    var bIn = $('[data-cal-open="in"]', form), bOut = $('[data-cal-open="out"]', form);
     var MON = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-    var iso = function (d) { return d.getFullYear() + '-' + ('0' + (d.getMonth() + 1)).slice(-2) + '-' + ('0' + d.getDate()).slice(-2); };
-    var parse = function (s) { var p = (s || '').split('-'); return p.length === 3 ? new Date(+p[0], +p[1] - 1, +p[2]) : null; };
-    var fmt = function (d) { return d.getDate() + '+' + MON[d.getMonth()] + '+' + d.getFullYear(); };
-    var addDays = function (d, n) { var x = new Date(d); x.setDate(x.getDate() + n); return x; };
+    var loc = E.lang || 'pt-BR';
+    var fMonth = new Intl.DateTimeFormat(loc, { month: 'long', year: 'numeric' });
+    var fShort = new Intl.DateTimeFormat(loc, { weekday: 'short', day: 'numeric', month: 'short' });
+    var fLong = new Intl.DateTimeFormat(loc, { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' });
+    var wk = []; for (var w = 0; w < 7; w++) wk.push(new Intl.DateTimeFormat(loc, { weekday: 'narrow' }).format(new Date(2026, 1, 1 + w))); // 1/2/2026 = domingo
     var today = new Date(); today.setHours(0, 0, 0, 0);
-    fin.min = iso(today); fout.min = iso(addDays(today, 1));
-    fin.addEventListener('change', function () {
-      var a = parse(fin.value); if (!a) return;
-      fout.min = iso(addDays(a, 1));
-      var b = parse(fout.value);
-      if (!b || b <= a) fout.value = iso(addDays(a, 2));
-      err.hidden = true;
+    var dIn = null, dOut = null, hover = null, phase = 'in', view = new Date(today.getFullYear(), today.getMonth(), 1);
+    var same = function (x, y) { return x && y && x.getTime() === y.getTime(); };
+    var addDays = function (d, n) { var x = new Date(d); x.setDate(x.getDate() + n); return x; };
+    var nights = function () { return dIn && dOut ? Math.round((dOut - dIn) / 864e5) : 0; };
+    var cap = function (x) { return x.charAt(0).toUpperCase() + x.slice(1); };
+    function nMonths() { return innerWidth >= 640 ? 2 : 1; }
+    function monthHTML(m) {
+      var y = m.getFullYear(), mo = m.getMonth(), first = new Date(y, mo, 1).getDay(), days = new Date(y, mo + 1, 0).getDate();
+      var h = '<div class="cal__m"><p class="cal__t">' + cap(fMonth.format(m)) + '</p><div class="cal__g">';
+      wk.forEach(function (x) { h += '<span class="cal__w">' + x + '</span>'; });
+      for (var i = 0; i < first; i++) h += '<span></span>';
+      var end = dOut || (phase === 'out' && dIn && hover > dIn ? hover : null);
+      for (var d = 1; d <= days; d++) {
+        var dt = new Date(y, mo, d), c = 'cal__d', dis = dt < today;
+        if (same(dt, today)) c += ' is-today';
+        if (same(dt, dIn)) c += ' is-in';
+        if (same(dt, dOut) || (!dOut && same(dt, end))) c += ' is-out';
+        if (dIn && end && dt > dIn && dt < end) c += ' is-mid';
+        h += '<button type="button" class="' + c + '" data-day="' + dt.getTime() + '"' + (dis ? ' disabled' : '') + ' aria-label="' + fLong.format(dt) + '"' + (same(dt, dIn) || same(dt, dOut) ? ' aria-pressed="true"' : '') + '>' + d + '</button>';
+      }
+      return h + '</div></div>';
+    }
+    function draw() {
+      var h = '';
+      for (var i = 0; i < nMonths(); i++) h += monthHTML(new Date(view.getFullYear(), view.getMonth() + i, 1));
+      months.innerHTML = h;
+      $('[data-cal-nav="-1"]', form).disabled = view <= new Date(today.getFullYear(), today.getMonth(), 1);
+      var n = nights();
+      hint.textContent = phase === 'in' ? T.cal_in : (n ? (n === 1 ? T.night : tr('nights', n)) : T.cal_out);
+      vIn.textContent = dIn ? fShort.format(dIn) : T.pick;
+      vOut.textContent = dOut ? fShort.format(dOut) : T.pick;
+      bIn.classList.toggle('is-on', !cal.hidden && phase === 'in');
+      bOut.classList.toggle('is-on', !cal.hidden && phase === 'out');
+      bIn.classList.toggle('has-v', !!dIn); bOut.classList.toggle('has-v', !!dOut);
+    }
+    function openCal(p) {
+      phase = p === 'out' && dIn ? 'out' : 'in';
+      var ref = phase === 'out' ? (dOut || dIn) : (dIn || today);
+      view = new Date(ref.getFullYear(), ref.getMonth(), 1);
+      if (phase === 'out' && nMonths() === 2 && dIn && dIn.getMonth() !== ref.getMonth()) view = new Date(dIn.getFullYear(), dIn.getMonth(), 1);
+      cal.hidden = false; err.hidden = true;
+      if (!desk.matches) lock();
+      draw();
+      requestAnimationFrame(function () { cal.classList.add('is-open'); var f = $('.cal__d.is-in, .cal__d:not([disabled])', cal); if (f) f.focus({ preventScroll: true }); });
+    }
+    function closeCal(focusBtn) {
+      if (cal.hidden) return;
+      cal.classList.remove('is-open'); cal.hidden = true;
+      if (!desk.matches) unlock();
+      draw();
+      if (focusBtn) focusBtn.focus({ preventScroll: true });
+    }
+    bIn.addEventListener('click', function () { cal.hidden || phase !== 'in' ? openCal('in') : closeCal(); });
+    bOut.addEventListener('click', function () { cal.hidden || phase !== 'out' ? openCal('out') : closeCal(); });
+    $('[data-cal-close]', form).addEventListener('click', function () { closeCal(bIn); });
+    $$('[data-cal-nav]', form).forEach(function (b) { b.addEventListener('click', function () { view = new Date(view.getFullYear(), view.getMonth() + (+b.dataset.calNav), 1); draw(); }); });
+    months.addEventListener('click', function (e) {
+      var b = e.target.closest('[data-day]'); if (!b || b.disabled) return;
+      var d = new Date(+b.dataset.day);
+      if (phase === 'in' || !dIn || d <= dIn) {
+        dIn = d; dOut = null; phase = 'out'; hover = null; draw();
+        var nb = $('[data-day="' + d.getTime() + '"]', months); if (nb) nb.focus({ preventScroll: true });
+      } else {
+        dOut = d; draw();
+        setTimeout(function () { closeCal(); $('button[type=submit]', form).focus({ preventScroll: true }); }, 280);
+      }
     });
-    fout.addEventListener('change', function () { err.hidden = true; });
+    months.addEventListener('mouseover', function (e) {
+      if (phase !== 'out' || !dIn || dOut) return;
+      var b = e.target.closest('[data-day]'); if (!b) return;
+      var d = new Date(+b.dataset.day); if (same(d, hover)) return;
+      hover = d;
+      $$('.cal__d', months).forEach(function (x) {
+        var t = +x.dataset.day;
+        x.classList.toggle('is-mid', t > dIn.getTime() && t < hover.getTime());
+        x.classList.toggle('is-out', hover > dIn && t === hover.getTime());
+      });
+    });
+    cal.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape') { e.stopPropagation(); closeCal(phase === 'out' ? bOut : bIn); return; }
+      var b = e.target.closest && e.target.closest('[data-day]'); if (!b) return;
+      var mv = { ArrowLeft: -1, ArrowRight: 1, ArrowUp: -7, ArrowDown: 7 }[e.key]; if (!mv) return;
+      e.preventDefault();
+      var t = addDays(new Date(+b.dataset.day), mv); if (t < today) return;
+      var nb = $('[data-day="' + t.getTime() + '"]', months);
+      if (!nb) { view = new Date(view.getFullYear(), view.getMonth() + (mv > 0 ? 1 : -1), 1); draw(); nb = $('[data-day="' + t.getTime() + '"]', months); }
+      if (nb) nb.focus();
+    });
+    document.addEventListener('pointerdown', function (e) { if (!cal.hidden && !cal.contains(e.target) && !e.target.closest('[data-cal-open]')) closeCal(); });
+    addEventListener('resize', function () { if (!cal.hidden) draw(); });
+    var fmt = function (d) { return d.getDate() + '+' + MON[d.getMonth()] + '+' + d.getFullYear(); };
     form.addEventListener('submit', function (e) {
       e.preventDefault();
-      var a = parse(fin.value), b = parse(fout.value), url = E.motor;
-      if (a && !b) { b = addDays(a, 1); }
-      if (a && b) {
-        if (b <= a || a < today) { err.textContent = T.dates; err.hidden = false; fout.focus(); return; }
-        url += '&checkin=' + fmt(a) + '&checkout=' + fmt(b);
-      }
-      err.hidden = true;
+      if (!dIn) { openCal('in'); return; }
+      if (!dOut) { openCal('out'); return; }
+      var url = E.motor + '&checkin=' + fmt(dIn) + '&checkout=' + fmt(dOut);
       var w = window.open(url, '_blank');
       if (w) { try { w.opener = null; } catch (x) {} } else location.href = url;
+    });
+    draw();
+  }
+
+  /* ---------- FAQ con animación ---------- */
+  $$('.faq details').forEach(function (d) {
+    var sum = $('summary', d), box = $('.faq__a', d), an = null;
+    sum.addEventListener('click', function (e) {
+      if (reduce || !box.animate) return;
+      e.preventDefault();
+      if (an) an.cancel();
+      if (!d.open) {
+        d.open = true;
+        var h = box.scrollHeight;
+        an = box.animate([{ height: '0px', opacity: 0, transform: 'translateY(-6px)' }, { height: h + 'px', opacity: 1, transform: 'none' }], { duration: 380, easing: 'cubic-bezier(.22,.8,.25,1)' });
+        an.onfinish = function () { an = null; };
+      } else {
+        d.classList.add('is-closing');
+        an = box.animate([{ height: box.offsetHeight + 'px', opacity: 1 }, { height: '0px', opacity: 0 }], { duration: 280, easing: 'cubic-bezier(.4,0,.2,1)' });
+        an.onfinish = function () { d.open = false; d.classList.remove('is-closing'); an = null; };
+      }
+    });
+  });
+
+  /* ---------- bot barquito ---------- */
+  if (bot) {
+    var bPanel = $('.bot__panel', bot), bLog = $('[data-bot-log]', bot), bTog = $('[data-bot-toggle]', bot), busy = false;
+    var bOpen = function (open) {
+      bPanel.hidden = !open; bot.classList.toggle('is-open', open); bTog.setAttribute('aria-expanded', String(open));
+      if (open) { setTimeout(function () { var q = $('.bot__q', bot); if (q) q.focus({ preventScroll: true }); }, 50); }
+      else bTog.focus({ preventScroll: true });
+    };
+    bTog.addEventListener('click', function () { bOpen(bPanel.hidden); });
+    $('[data-bot-close]', bot).addEventListener('click', function () { bOpen(false); });
+    bot.addEventListener('keydown', function (e) { if (e.key === 'Escape' && !bPanel.hidden) { e.stopPropagation(); bOpen(false); } });
+    document.addEventListener('pointerdown', function (e) { if (!bPanel.hidden && !bot.contains(e.target)) bOpen(false); });
+    var scrollLog = function () { bLog.scrollTo({ top: bLog.scrollHeight, behavior: reduce ? 'auto' : 'smooth' }); };
+    $('[data-bot-qs]', bot).addEventListener('click', function (e) {
+      var q = e.target.closest('.bot__q'); if (!q || busy) return;
+      busy = true; q.classList.add('is-used');
+      var me = document.createElement('div'); me.className = 'bot__me'; me.textContent = q.textContent; bLog.appendChild(me);
+      var ty = document.createElement('div'); ty.className = 'bot__msg bot__typing'; ty.innerHTML = '<i></i><i></i><i></i>'; bLog.appendChild(ty); scrollLog();
+      setTimeout(function () {
+        ty.remove();
+        var tpl = $('template[data-a="' + q.dataset.q + '"]', bot), m = document.createElement('div'); m.className = 'bot__msg';
+        m.appendChild(tpl.content.cloneNode(true)); bLog.appendChild(m);
+        var more = $('template[data-more]', bot); if (more && bLog.querySelectorAll('.bot__me').length === 1) bLog.appendChild(more.content.cloneNode(true));
+        scrollLog(); busy = false;
+      }, reduce ? 0 : 650);
     });
   }
 
