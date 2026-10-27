@@ -263,7 +263,7 @@
         '<span class="card__img"><img src="' + img(m.f, 480) + '" srcset="' + img(m.f, 480) + ' 480w, ' + img(m.f, 800) + ' 800w" sizes="(min-width: 1024px) 30vw, (min-width: 640px) 45vw, 92vw" width="' + m.w + '" height="' + m.h + '" alt="" loading="lazy" decoding="async">' +
           (tags ? '<span class="card__tags">' + tags + '</span>' : '') +
           '<span class="card__ppl" title="' + esc(tr('people', c.pax)) + '">' + ppl + '<b>' + c.pax + '</b></span>' +
-          '<span class="card__count">' + c.img.length + ' ' + esc(T.photos) + '</span></span>' +
+          '</span>' +
         '<span class="card__n">' + esc(c.name) + '</span>' +
         (unitsLabel(c) ? '<span class="card__meta">' + esc(unitsLabel(c)) + '</span>' : '') +
       '</button>' +
@@ -431,29 +431,6 @@
     var t0 = target(ALL, 10); sc = t0.s; tx = t0.tx; ty = t0.ty; render();
     if ('ResizeObserver' in window) new ResizeObserver(function () { render(); }).observe(stage);
   })();
-
-  /* ---------- barquito que navega con el scroll (divisor) ---------- */
-  var nav = $('[data-navega]');
-  if (nav && !reduce) {
-    var boat = $('.navega__boat', nav), nTick = false, bx = 0, tx2 = 0, raf2 = 0;
-    var target = function () {
-      var r = nav.getBoundingClientRect(), vh = innerHeight;
-      var p = Math.min(1, Math.max(0, (vh - r.top) / (vh + r.height)));
-      return p * (nav.clientWidth - boat.clientWidth - 8);
-    };
-    var glide = function () {
-      bx += (tx2 - bx) * 0.06;
-      boat.style.transform = 'translateX(' + bx.toFixed(1) + 'px)';
-      if (Math.abs(tx2 - bx) > 0.5) raf2 = requestAnimationFrame(glide); else raf2 = 0;
-    };
-    var upd = function () {
-      nTick = false;
-      var r = nav.getBoundingClientRect(); if (r.bottom < -200 || r.top > innerHeight + 200) return;
-      tx2 = target(); if (!raf2) raf2 = requestAnimationFrame(glide);
-    };
-    addEventListener('scroll', function () { if (!nTick) { nTick = true; requestAnimationFrame(upd); } }, { passive: true });
-    bx = tx2 = target(); boat.style.transform = 'translateX(' + bx + 'px)';
-  }
 
   /* ---------- hero: punta de la vela alineada con el botón Reservar ---------- */
   var hMedia = $('.hero__media'), bookBtn = $('.top__book');

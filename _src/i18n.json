@@ -127,7 +127,7 @@
   "av_s4": "Conforto",
   "av_s5": "Instalações",
   "av_s6": "Custo-benefício",
-  "av_orig": "Avaliações originais em espanhol, via Booking.com",
+  "av_orig": "Avaliações reais de hóspedes, no idioma original, via Booking.com",
   "av_more": "Ver todas no Booking",
   "ch_eyebrow": "Como chegar",
   "ch_t": "Bem na areia <em>de Maragogi.</em>",
@@ -227,7 +227,9 @@
   "c_cl": "Chile",
   "c_uy": "Uruguai",
   "c_ar": "Argentina",
-  "back_home": "Voltar ao início"
+  "back_home": "Voltar ao início",
+  "c_br": "Brasil",
+  "av_see": "Ver no Booking"
  },
  "es": {
   "htmllang": "es",
@@ -357,7 +359,7 @@
   "av_s4": "Confort",
   "av_s5": "Instalaciones",
   "av_s6": "Calidad-precio",
-  "av_orig": "Comentarios de huéspedes, vía Booking.com",
+  "av_orig": "Comentarios reales de huéspedes, en su idioma original, vía Booking.com",
   "av_more": "Ver todos en Booking",
   "ch_eyebrow": "Cómo llegar",
   "ch_t": "Sobre la arena <em>de Maragogi.</em>",
@@ -457,7 +459,9 @@
   "c_cl": "Chile",
   "c_uy": "Uruguay",
   "c_ar": "Argentina",
-  "back_home": "Volver al inicio"
+  "back_home": "Volver al inicio",
+  "c_br": "Brasil",
+  "av_see": "Ver en Booking"
  },
  "en": {
   "htmllang": "en",
@@ -587,7 +591,7 @@
   "av_s4": "Comfort",
   "av_s5": "Facilities",
   "av_s6": "Value for money",
-  "av_orig": "Guest reviews in their original Spanish, via Booking.com",
+  "av_orig": "Real guest reviews in their original language, via Booking.com",
   "av_more": "See all on Booking",
   "ch_eyebrow": "Getting here",
   "ch_t": "Right on <em>Maragogi's sand.</em>",
@@ -687,6 +691,8 @@
   "c_cl": "Chile",
   "c_uy": "Uruguay",
   "c_ar": "Argentina",
-  "back_home": "Back to home"
+  "back_home": "Back to home",
+  "c_br": "Brazil",
+  "av_see": "See on Booking"
  }
 }
