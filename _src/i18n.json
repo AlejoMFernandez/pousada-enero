@@ -229,7 +229,11 @@
   "c_ar": "Argentina",
   "back_home": "Voltar ao início",
   "c_br": "Brasil",
-  "av_see": "Ver no Booking"
+  "av_see": "Ver no Booking",
+  "av_score": "Nota",
+  "q_d1": "julho de 2026 · Suíte Dupla",
+  "q_d2": "setembro de 2026 · Suíte Deluxe",
+  "q_d3": "outubro de 2026 · Suíte Dupla"
  },
  "es": {
   "htmllang": "es",
@@ -461,7 +465,11 @@
   "c_ar": "Argentina",
   "back_home": "Volver al inicio",
   "c_br": "Brasil",
-  "av_see": "Ver en Booking"
+  "av_see": "Ver en Booking",
+  "av_score": "Puntuación",
+  "q_d1": "julio de 2026 · Suite Doble",
+  "q_d2": "septiembre de 2026 · Suite Deluxe",
+  "q_d3": "octubre de 2026 · Suite Doble"
  },
  "en": {
   "htmllang": "en",
@@ -693,6 +701,10 @@
   "c_ar": "Argentina",
   "back_home": "Back to home",
   "c_br": "Brazil",
-  "av_see": "See on Booking"
+  "av_see": "See on Booking",
+  "av_score": "Score",
+  "q_d1": "July 2026 · Double Suite",
+  "q_d2": "September 2026 · Deluxe Suite",
+  "q_d3": "October 2026 · Double Suite"
  }
 }
