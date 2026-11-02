@@ -612,31 +612,43 @@
   /* ---------- mesa del desayuno navegable ---------- */
   var mesa = $('[data-mesa]');
   if (mesa) {
-    var dots = $$('.mesa__dot', mesa), its = $$('.mesa__it', mesa), fig = $('.mesa__fig', mesa), cur2 = -1, touched = false, autoT = 0;
-    var cn = $('[data-mesa-n]', mesa), ct = $('[data-mesa-t]', mesa), cp = $('[data-mesa-p]', mesa), N = dots.length;
+    var dots = $$('.mesa__dot', mesa), chipsM = $$('.mesa__chip', mesa), info = $$('.mesa__data li', mesa), stage = $('.mesa__stage', mesa), scrollEl = $('[data-mesa-scroll]', mesa);
+    var pop = $('.mesa__pop', mesa), cn = $('[data-mesa-n]', mesa), ct = $('[data-mesa-t]', mesa), cp = $('[data-mesa-p]', mesa), N = dots.length, cur2 = -1, touched = false, autoT = 0;
     function show(i, user) {
       i = (i + N) % N; cur2 = i;
-      var d = dots[i];
-      fig.style.setProperty('--sx', d.style.getPropertyValue('--x'));
-      fig.style.setProperty('--sy', d.style.getPropertyValue('--y'));
-      fig.classList.add('is-on');
-      fig.classList.toggle('card-top', parseFloat(d.style.getPropertyValue('--y')) > 55);
-      dots.forEach(function (x, k) { x.classList.toggle('is-on', k === i); x.setAttribute('aria-pressed', String(k === i)); });
-      its.forEach(function (x, k) { x.classList.toggle('is-on', k === i); });
-      var b = $('b', its[i]), sm = $('small', its[i]);
-      cn.textContent = ('0' + (i + 1)).slice(-2) + ' / ' + N; ct.textContent = b.textContent; cp.textContent = sm.textContent;
+      var d = dots[i], x = parseFloat(d.style.getPropertyValue('--x')), y = parseFloat(d.style.getPropertyValue('--y'));
+      stage.style.setProperty('--sx', x + '%'); stage.style.setProperty('--sy', y + '%');
+      stage.classList.add('is-on');
+      dots.forEach(function (el, k) { el.classList.toggle('is-on', k === i); el.setAttribute('aria-pressed', String(k === i)); });
+      chipsM.forEach(function (el, k) { el.classList.toggle('is-on', k === i); });
+      cn.textContent = ('0' + (i + 1)).slice(-2) + ' / ' + N; ct.textContent = info[i].dataset.t; cp.textContent = info[i].dataset.p;
+      pop.style.left = x + '%'; pop.style.top = y + '%';
+      pop.classList.toggle('to-left', x > 58); pop.classList.toggle('to-up', y > 62);
+      pop.classList.remove('is-in'); void pop.offsetWidth; pop.classList.add('is-in');
+      pop.style.setProperty('--shift', '0px');
+      if (scrollEl.scrollWidth > scrollEl.clientWidth + 4) {
+        var maxS = scrollEl.scrollWidth - scrollEl.clientWidth;
+        var target = Math.max(0, Math.min(maxS, stage.clientWidth * x / 100 - scrollEl.clientWidth / 2));
+        scrollEl.scrollTo({ left: target, behavior: reduce ? 'auto' : 'smooth' });
+        var dx = stage.clientWidth * x / 100 - target, half = pop.offsetWidth / 2, vw = scrollEl.clientWidth, sh = 0;
+        if (dx - half < 10) sh = 10 - (dx - half); else if (dx + half > vw - 10) sh = (vw - 10) - (dx + half);
+        pop.style.setProperty('--shift', sh + 'px');
+      }
+      var chip = chipsM[i], bar = chip.parentNode;
+      if (bar.scrollWidth > bar.clientWidth) bar.scrollTo({ left: chip.offsetLeft - bar.clientWidth / 2 + chip.clientWidth / 2, behavior: reduce ? 'auto' : 'smooth' });
       if (user) { touched = true; clearInterval(autoT); }
     }
-    dots.forEach(function (d, k) { d.addEventListener('click', function () { show(k, true); }); d.addEventListener('mouseenter', function () { if (matchMedia('(hover:hover)').matches) show(k, true); }); });
-    its.forEach(function (d, k) { d.addEventListener('click', function () { show(k, true); }); d.addEventListener('mouseenter', function () { if (matchMedia('(hover:hover)').matches) show(k, true); }); });
+    var hov = matchMedia('(hover:hover)');
+    dots.forEach(function (d, k) { d.addEventListener('click', function () { show(k, true); }); d.addEventListener('mouseenter', function () { if (hov.matches) show(k, true); }); });
+    chipsM.forEach(function (d, k) { d.addEventListener('click', function () { show(k, true); }); });
     $$('[data-mesa-go]', mesa).forEach(function (b) { b.addEventListener('click', function () { show(cur2 + (+b.dataset.mesaGo), true); }); });
+    mesa.addEventListener('keydown', function (e) { if (e.key === 'ArrowRight') { show(cur2 + 1, true); } if (e.key === 'ArrowLeft') { show(cur2 - 1, true); } });
     show(0, false);
-    // recorrido automático suave hasta que la persona toque algo
     if (!reduce && 'IntersectionObserver' in window) {
       new IntersectionObserver(function (es) {
         clearInterval(autoT);
-        if (es[0].isIntersecting && !touched) autoT = setInterval(function () { show(cur2 + 1, false); }, 3200);
-      }, { threshold: 0.4 }).observe(fig);
+        if (es[0].isIntersecting && !touched) autoT = setInterval(function () { show(cur2 + 1, false); }, 3400);
+      }, { threshold: 0.5 }).observe(stage);
     }
   }
 

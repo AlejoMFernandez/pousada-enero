@@ -823,56 +823,48 @@ body.lock .bot:not(.is-open){opacity:0;pointer-events:none}
 .pg-hero--short .wrap{display:flex;flex-direction:column;gap:14px}
 .pg-hero--short + .suites{padding-top:0}
 
-/* ===== mesa del desayuno ===== */
+/* ===== mesa del desayuno (horizontal) ===== */
 @property --sx{syntax:'<percentage>';inherits:true;initial-value:50%}
 @property --sy{syntax:'<percentage>';inherits:true;initial-value:50%}
-.mesa{display:grid;grid-template-columns:minmax(0,1fr);gap:24px}
-.mesa__fig{position:relative;border-radius:4px;overflow:hidden;aspect-ratio:1449/2009;max-height:86svh;margin:0 auto;width:100%;background:var(--noite);transition:--sx .7s var(--ease),--sy .7s var(--ease)}
-.mesa__fig img{width:100%;height:100%;object-fit:cover}
-.mesa__spot{position:absolute;inset:0;pointer-events:none;background:radial-gradient(circle at var(--sx) var(--sy),transparent 0,transparent 13%,rgba(10,42,64,.55) 24%);opacity:0;transition:opacity .5s}
-.mesa__fig.is-on .mesa__spot{opacity:1}
-.mesa__dot{position:absolute;left:var(--x);top:var(--y);transform:translate(-50%,-50%);width:44px;height:44px;border:0;background:none;padding:0;display:grid;place-items:center;cursor:pointer;z-index:2}
-.mesa__dot span{width:26px;height:26px;border-radius:50%;background:var(--cal);color:var(--azul);font:700 12px/26px var(--sans);text-align:center;box-shadow:0 3px 12px rgba(0,0,0,.35);transition:transform .3s var(--ease),background-color .3s}
-.mesa__dot::before{content:"";position:absolute;width:26px;height:26px;border-radius:50%;border:2px solid rgba(247,242,232,.85);animation:ring 2.6s ease-out infinite}
-.mesa__dot.is-on span,.mesa__dot:hover span{background:var(--sol);transform:scale(1.2)}
+.mesa__lead{margin-top:10px}
+.mesa{display:flex;flex-direction:column;gap:16px}
+.mesa__scroll{overflow-x:auto;overflow-y:hidden;scrollbar-width:none;overscroll-behavior-x:contain;-webkit-overflow-scrolling:touch}
+.mesa__scroll::-webkit-scrollbar{display:none}
+.mesa__stage{position:relative;margin:0;height:min(66svh,540px);aspect-ratio:2009/1348;transition:--sx .8s var(--ease),--sy .8s var(--ease)}
+.mesa__stage img{width:100%;height:100%;object-fit:cover;display:block}
+.mesa__spot{position:absolute;inset:0;pointer-events:none;background:radial-gradient(circle at var(--sx) var(--sy),transparent 0,transparent 9%,rgba(10,42,64,.38) 20%);opacity:0;transition:opacity .5s}
+.mesa__stage.is-on .mesa__spot{opacity:1}
+.mesa__dot{position:absolute;left:var(--x);top:var(--y);transform:translate(-50%,-50%);width:34px;height:34px;border:0;background:none;padding:0;cursor:pointer;z-index:2}
+.mesa__dot::after{content:"";position:absolute;left:50%;top:50%;width:12px;height:12px;margin:-6px 0 0 -6px;border-radius:50%;background:var(--cal);box-shadow:0 0 0 2px rgba(10,42,64,.35),0 2px 8px rgba(0,0,0,.4);transition:transform .3s var(--ease),background-color .3s}
+.mesa__dot::before{content:"";position:absolute;left:50%;top:50%;width:12px;height:12px;margin:-6px 0 0 -6px;border-radius:50%;border:1.5px solid rgba(247,242,232,.9);animation:ring 2.6s ease-out infinite}
+.mesa__dot.is-on::after,.mesa__dot:hover::after{background:var(--sol);transform:scale(1.25)}
 .mesa__dot.is-on::before{border-color:var(--sol)}
-.mesa__side{display:flex;flex-direction:column;gap:16px;min-width:0}
-.mesa__lead{margin:0}
-.mesa__card{background:var(--azul);color:var(--cal);border-radius:4px;padding:20px 22px;display:grid;grid-template-columns:minmax(0,1fr) auto;grid-template-rows:auto auto auto;column-gap:16px;position:sticky;bottom:calc(84px + var(--safe-b));z-index:3;box-shadow:0 14px 34px -18px rgba(10,42,64,.6)}
-.mesa__cn{grid-column:1;font-size:12px;font-weight:600;letter-spacing:.18em;color:var(--sol)}
-.mesa__ct{grid-column:1;font-family:var(--serif);font-weight:400;font-size:26px;line-height:1.15;margin-top:4px}
-.mesa__cp{grid-column:1;font-size:15px;line-height:1.5;color:var(--areia);margin-top:4px}
-.mesa__nav{grid-column:2;grid-row:1 / 4;display:flex;flex-direction:column;justify-content:center;gap:8px}
-.mesa__nav .arrow{box-shadow:inset 0 0 0 1.5px var(--cal);color:var(--cal);width:44px;height:44px}
-@media (hover:hover){.mesa__nav .arrow:hover{background:var(--cal);color:var(--azul)}}
-.mesa__list{display:none}
-.mesa__more{display:flex;align-items:center;gap:12px;font-size:15px;line-height:1.45;color:var(--txt);background:var(--blanco);border-radius:4px;padding:14px 16px}
+.mesa__dot:focus-visible{outline:none}
+.mesa__dot:focus-visible::after{box-shadow:0 0 0 3px var(--sol)}
+.mesa__pop{position:absolute;z-index:3;width:240px;background:var(--cal);color:var(--azul);border-radius:4px;padding:12px 14px 13px;display:flex;flex-direction:column;gap:3px;box-shadow:0 14px 34px -12px rgba(10,42,64,.55);transform:translate(18px,-50%);pointer-events:none;transition:left .6s var(--ease),top .6s var(--ease)}
+.mesa__pop.to-left{transform:translate(calc(-100% - 18px),-50%)}
+.mesa__pop.to-up{transform:translate(18px,calc(-100% + 18px))}
+.mesa__pop.to-left.to-up{transform:translate(calc(-100% - 18px),calc(-100% + 18px))}
+.mesa__pop.is-in{animation:popIn .45s var(--ease)}
+@keyframes popIn{from{opacity:0}to{opacity:1}}
+.mesa__cn{font-size:11px;font-weight:700;letter-spacing:.18em;color:var(--terracota)}
+.mesa__ct{font-family:var(--serif);font-weight:400;font-size:21px;line-height:1.15}
+.mesa__cp{font-size:14px;line-height:1.45;color:var(--txt)}
+.mesa__bar{display:flex;align-items:center;gap:10px}
+.mesa__chips{flex:1;display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;padding:2px}
+.mesa__chips::-webkit-scrollbar{display:none}
+.mesa__chip{flex:none;border:0;background:transparent;box-shadow:inset 0 0 0 1px rgba(1,72,120,.3);border-radius:40px;padding:9px 14px;font-size:14px;font-weight:500;min-height:42px;color:var(--azul);transition:background-color .25s,color .25s}
+.mesa__chip.is-on{background:var(--azul);color:var(--cal);box-shadow:none}
+@media (hover:hover){.mesa__chip:not(.is-on):hover{box-shadow:inset 0 0 0 1.5px var(--azul)}}
+.mesa__bar .arrow{flex:none}
+.mesa__more{display:flex;align-items:center;gap:12px;font-size:15px;line-height:1.45;color:var(--txt);background:var(--blanco);border-radius:4px;padding:14px 16px;margin:4px 0 0}
 .mesa__more img{flex:none}
 @media (min-width:900px){
-  .mesa{grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(32px,5vw,72px);align-items:start}
-  .mesa__fig{max-height:none;position:sticky;top:calc(var(--top) + 20px)}
-  .mesa__card{display:none}
-  .mesa__list{display:flex;flex-direction:column;border-top:1px solid var(--linea)}
-  .mesa__list li{border-bottom:1px solid var(--linea)}
-  .mesa__it{width:100%;display:grid;grid-template-columns:44px minmax(0,1fr);gap:12px;align-items:baseline;text-align:left;border:0;background:transparent;padding:13px 10px;border-radius:3px;transition:background-color .25s}
-  .mesa__n{font-family:var(--serif);font-style:italic;font-weight:300;font-size:22px;color:var(--terracota)}
-  .mesa__tx{display:flex;flex-direction:column;gap:2px}
-  .mesa__tx b{font-size:17px;font-weight:600;color:var(--azul)}
-  .mesa__tx small{font-size:15px;color:var(--txt);max-height:0;overflow:hidden;opacity:0;transition:max-height .4s var(--ease),opacity .3s}
-  .mesa__it.is-on{background:var(--blanco)}
-  .mesa__it.is-on small{max-height:60px;opacity:1}
+  .mesa__scroll{overflow:visible;max-width:calc(var(--max) + var(--pad)*2);margin:0 auto;padding:0 var(--pad);width:100%}
+  .mesa__stage{width:100%;height:auto;max-height:calc(100svh - var(--top) - 60px);max-width:calc((100svh - var(--top) - 60px) * 2009 / 1348);margin:0 auto;border-radius:4px;overflow:hidden}
+  .mesa__pop{width:270px}
+  .mesa__bar .arrow{display:flex}
 }
+@media (max-width:899px){.mesa__bar .arrow{display:none}.mesa__pop,.mesa__pop.to-left{width:210px;transform:translate(calc(-50% + var(--shift,0px)),20px)}.mesa__pop.to-up,.mesa__pop.to-left.to-up{transform:translate(calc(-50% + var(--shift,0px)),calc(-100% - 20px))}}
+.mesa__bar .arrow{align-items:center;justify-content:center;padding:0}
 @media (prefers-reduced-motion:reduce){.mesa__dot::before{animation:none}}
-@media (min-width:900px){
-  .mesa{grid-template-columns:auto minmax(0,1fr)}
-  .mesa__fig{height:min(calc(100svh - var(--top) - 48px),880px);width:auto;max-width:52vw}
-}
-@media (max-width:899px){
-  .mesa__card{position:absolute;left:10px;right:10px;bottom:10px;top:auto;z-index:4;padding:14px 16px;transition:top .4s var(--ease),bottom .4s var(--ease),transform .4s var(--ease)}
-  .mesa__fig.card-top .mesa__card{bottom:auto;top:10px}
-  .mesa__ct{font-size:21px}
-  .mesa__cp{font-size:14px}
-  .mesa__nav .arrow{width:40px;height:40px}
-  .mesa__side{order:-1}
-  .mesa__fig{max-height:none}
-}
