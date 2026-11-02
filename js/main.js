@@ -609,6 +609,37 @@
     draw();
   }
 
+  /* ---------- mesa del desayuno navegable ---------- */
+  var mesa = $('[data-mesa]');
+  if (mesa) {
+    var dots = $$('.mesa__dot', mesa), its = $$('.mesa__it', mesa), fig = $('.mesa__fig', mesa), cur2 = -1, touched = false, autoT = 0;
+    var cn = $('[data-mesa-n]', mesa), ct = $('[data-mesa-t]', mesa), cp = $('[data-mesa-p]', mesa), N = dots.length;
+    function show(i, user) {
+      i = (i + N) % N; cur2 = i;
+      var d = dots[i];
+      fig.style.setProperty('--sx', d.style.getPropertyValue('--x'));
+      fig.style.setProperty('--sy', d.style.getPropertyValue('--y'));
+      fig.classList.add('is-on');
+      fig.classList.toggle('card-top', parseFloat(d.style.getPropertyValue('--y')) > 55);
+      dots.forEach(function (x, k) { x.classList.toggle('is-on', k === i); x.setAttribute('aria-pressed', String(k === i)); });
+      its.forEach(function (x, k) { x.classList.toggle('is-on', k === i); });
+      var b = $('b', its[i]), sm = $('small', its[i]);
+      cn.textContent = ('0' + (i + 1)).slice(-2) + ' / ' + N; ct.textContent = b.textContent; cp.textContent = sm.textContent;
+      if (user) { touched = true; clearInterval(autoT); }
+    }
+    dots.forEach(function (d, k) { d.addEventListener('click', function () { show(k, true); }); d.addEventListener('mouseenter', function () { if (matchMedia('(hover:hover)').matches) show(k, true); }); });
+    its.forEach(function (d, k) { d.addEventListener('click', function () { show(k, true); }); d.addEventListener('mouseenter', function () { if (matchMedia('(hover:hover)').matches) show(k, true); }); });
+    $$('[data-mesa-go]', mesa).forEach(function (b) { b.addEventListener('click', function () { show(cur2 + (+b.dataset.mesaGo), true); }); });
+    show(0, false);
+    // recorrido automático suave hasta que la persona toque algo
+    if (!reduce && 'IntersectionObserver' in window) {
+      new IntersectionObserver(function (es) {
+        clearInterval(autoT);
+        if (es[0].isIntersecting && !touched) autoT = setInterval(function () { show(cur2 + 1, false); }, 3200);
+      }, { threshold: 0.4 }).observe(fig);
+    }
+  }
+
   /* ---------- FAQ con animación ---------- */
   $$('.faq details').forEach(function (d) {
     var sum = $('summary', d), box = $('.faq__a', d), an = null;
