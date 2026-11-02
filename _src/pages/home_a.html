@@ -1,0 +1,123 @@
+<section class="hero" aria-labelledby="hero-t">
+  <div class="hero__txt">
+    <p class="eyebrow rv" style="--d:1">{{hero_eyebrow}}</p>
+    <h1 id="hero-t" class="hero__t"><span class="ln"><span style="--d:2">{{hero_t1}}</span></span><span class="ln"><em style="--d:3">{{hero_t2}}</em></span></h1>
+    <img class="ola rv" style="--d:4" src="/img/trazo-ola.svg" alt="" width="200" height="30">
+    <p class="hero__p rv" style="--d:5">{{hero_p}}</p>
+    <div class="hero__cta rv" style="--d:6">
+      <a class="btn btn--azul btn--lg" href="{{MOTOR}}" target="_blank" rel="noopener" data-book>{{reservar_cta}}</a>
+      <a class="btn btn--line btn--lg" href="#suites">{{ver_suites}}</a>
+    </div>
+    <div class="badges rv" style="--d:7">
+      <a class="badge" href="{{booking_url}}" target="_blank" rel="noopener"><span class="badge__n badge__n--azul">9,4</span><span class="badge__bk"><img src="/img/booking.svg" alt="Booking.com" width="96" height="16"><span><strong>{{av_fant}}</strong> · {{b_reviews}}</span></span></a>
+      <a class="badge" href="#direto"><span class="badge__n badge__n--sol">17%<small>OFF</small></span><span><strong>{{b_direct}}</strong><br>{{b_site}}</span></a>
+    </div>
+  </div>
+  <div class="hero__media">
+    <picture class="hero__pic">
+      <source media="(min-width: 900px)" srcset="/img/hero-desk-960.webp 960w, /img/hero-desk-1600.webp 1600w" sizes="60vw">
+      <img src="/img/hero-celu-600.webp" srcset="/img/hero-celu-600.webp 600w, /img/hero-celu-900.webp 900w" sizes="100vw" width="900" height="1125" alt="{{hero_alt_celu}}" fetchpriority="high" decoding="async" data-alt-desk="{{hero_alt_desk}}">
+    </picture>
+    <a class="sello" href="{{booking_url}}" target="_blank" rel="noopener" aria-label="9,4 Booking · {{b_reviews}}"><img class="sello__ring" src="/img/horizonte.svg" alt="" width="160" height="160"><span class="sello__n">9,4</span><img class="sello__bk" src="/img/booking.svg" alt="Booking.com" width="74" height="13"></a>
+  </div>
+</section>
+
+<section class="direto" id="direto" aria-labelledby="direto-t">
+  <div class="wrap direto__grid">
+    <div class="direto__big rv"><span class="direto__pct">17%<small>OFF</small></span><span class="hand hand--claro">{{rd_big}}</span></div>
+    <div class="direto__info">
+      <h2 id="direto-t" class="h2 h2--claro rv">{{rd_t}}</h2>
+      <ul class="direto__list">
+        <li class="rv" style="--d:1"><strong>{{rd_1t}}</strong><span>{{rd_1p}}</span></li>
+        <li class="rv" style="--d:2"><strong>{{rd_2t}}</strong><span>{{rd_2p}}</span></li>
+        <li class="rv" style="--d:3"><strong>{{rd_3t}}</strong><span>{{rd_3p}}</span></li>
+      </ul>
+    </div>
+    <form class="fechas rv" style="--d:2" data-fechas novalidate>
+      <div class="fechas__row">
+        <button type="button" class="campo" data-cal-open="in" aria-haspopup="dialog"><span>{{rd_in}}</span><b data-cal-v="in">{{js_pick}}</b></button>
+        <button type="button" class="campo" data-cal-open="out" aria-haspopup="dialog"><span>{{rd_out}}</span><b data-cal-v="out">{{js_pick}}</b></button>
+      </div>
+      <div class="cal" data-cal hidden role="dialog" aria-label="{{rd_in}} / {{rd_out}}">
+        <div class="cal__head"><p class="cal__hint" data-cal-hint>{{js_cal_in}}</p><button type="button" class="x cal__x" data-cal-close aria-label="{{js_close}}">×</button></div>
+        <div class="cal__nav"><button type="button" class="arrow" data-cal-nav="-1" aria-label="{{js_prev_m}}">←</button><button type="button" class="arrow" data-cal-nav="1" aria-label="{{js_next_m}}">→</button></div>
+        <div class="cal__months" data-cal-months></div>
+      </div>
+      <button class="btn btn--sol btn--lg btn--full" type="submit">{{rd_btn}}</button>
+      <p class="fechas__err" role="alert" hidden></p>
+      <p class="fechas__note">{{rd_note}}</p>
+    </form>
+  </div>
+</section>
+
+<section class="suites suites--feat" id="suites" aria-labelledby="suites-t">
+  <div class="wrap">
+    <div class="sec-head sec-head--row">
+      <div><p class="eyebrow rv">{{su_eyebrow}}</p><h2 id="suites-t" class="h2 rv">{{su_t}}</h2></div>
+      <div class="arrows"><button type="button" class="arrow" data-scroll="-1" aria-label="{{pa_prev}}">←</button><button type="button" class="arrow" data-scroll="1" aria-label="{{pa_next}}">→</button></div>
+    </div>
+  </div>
+  <div class="feat rail" data-rail data-drag data-featured="tripla-vista-mar,deluxe-vista-mar,vista-lateral-mar,terrea-vista-mar,prime-deluxe,casa-enero"></div>
+  <div class="wrap feat__more"><a class="btn btn--azul btn--lg rv" href="{{P_SUITES}}">{{su_all}} →</a><a class="link rv" href="{{P_SUITES}}#mapa">{{su_map}} →</a></div>
+</section>
+
+<div class="navega" aria-hidden="true" data-navega>
+  <svg class="navega__mar" viewBox="0 0 1440 40" preserveAspectRatio="none"><path d="M0 22 C120 12 240 32 360 22 C480 12 600 32 720 22 C840 12 960 32 1080 22 C1200 12 1320 32 1440 22"/></svg>
+  <img class="navega__boat" src="/img/barquito.svg" alt="" width="64" height="57">
+</div>
+
+<section class="exp" aria-labelledby="exp-t">
+  <div class="wrap">
+    <div class="sec-head"><div><p class="eyebrow rv">{{ex_eyebrow}}</p><h2 id="exp-t" class="h2 rv">{{ex_t}}</h2></div><p class="hand rv">{{po_note}}</p></div>
+    <div class="exp__grid">
+      <a class="exp__card rv" style="--d:1" href="{{P_POUSADA}}"><figure><img src="/img/puerta-quiosco-900.webp" width="1600" height="1067" alt="" loading="lazy" decoding="async"></figure><span class="exp__k">01</span><h3>{{ex_1t}}</h3><p>{{ex_1p}}</p><span class="exp__go">{{po_more}} →</span></a>
+      <a class="exp__card rv" style="--d:2" href="{{P_CAFE}}"><figure><img src="/img/cafe-cesta-800.webp" width="800" height="1000" alt="" loading="lazy" decoding="async"></figure><span class="exp__k">02</span><h3>{{ex_2t}}</h3><p>{{ex_2p}}</p><span class="exp__go">{{ex_2l}} →</span></a>
+      <a class="exp__card rv" style="--d:3" href="{{P_REST}}"><figure><img src="/img/rest-3-900.webp" width="900" height="900" alt="" loading="lazy" decoding="async"></figure><span class="exp__k">03</span><h3>{{ex_3t}}</h3><p>{{ex_3p}}</p><span class="exp__go">{{re_more}} →</span></a>
+    </div>
+  </div>
+</section>
+
+<section class="aval" id="avaliacoes" aria-labelledby="av-t">
+  <div class="wrap">
+    <div class="aval__top">
+      <div class="aval__score">
+        <p class="eyebrow rv">{{av_eyebrow}}</p>
+        <div class="aval__big rv"><p id="av-t" class="aval__n">9,4</p><div><a class="aval__bk" href="{{booking_url}}" target="_blank" rel="noopener"><img src="/img/booking.svg" alt="Booking.com" width="120" height="20"></a><p><strong>{{av_fant}}</strong> · {{av_on}}</p></div></div>
+      </div>
+      <ul class="subs">
+        <li><span>{{av_s1}}</span><i style="--w:96%"></i><b>9,6</b></li>
+        <li><span>{{av_s2}}</span><i style="--w:94%"></i><b>9,4</b></li>
+        <li><span>{{av_s3}}</span><i style="--w:93%"></i><b>9,3</b></li>
+        <li><span>{{av_s4}}</span><i style="--w:93%"></i><b>9,3</b></li>
+        <li><span>{{av_s5}}</span><i style="--w:92%"></i><b>9,2</b></li>
+        <li><span>{{av_s6}}</span><i style="--w:92%"></i><b>9,2</b></li>
+      </ul>
+    </div>
+    <div class="quotes" data-drag>
+      <blockquote class="quote rv" lang="pt" style="--d:1"><footer class="quote__who"><span class="quote__av" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="9" r="4"/><path d="M4 21c0-4.4 3.6-7 8-7s8 2.6 8 7z"/></svg></span><span><b>Hugo</b><span class="quote__c"><svg class="flag" viewBox="0 0 28 20" aria-hidden="true"><rect width="28" height="20" fill="#009c3b"/><path d="M14 2.5 25.5 10 14 17.5 2.5 10z" fill="#ffdf00"/><circle cx="14" cy="10" r="4.4" fill="#002776"/><path d="M9.8 9.2c2.8-.6 5.8-.2 8.3 1.3" stroke="#fff" stroke-width=".8" fill="none"/></svg>{{c_br}}</span></span><span class="quote__score" aria-label="{{av_score}} 10">10</span></footer><p class="quote__tt">Experiência fantástica!</p><p class="quote__d">{{q_d1}}</p><p>«Mais que uma hospedagem, é uma experiência de vida! O cafe da manhã com pé na areia é fantástico.»</p><a class="quote__nota" href="{{booking_url}}" target="_blank" rel="noopener">{{av_see}} ↗</a></blockquote>
+      <blockquote class="quote rv" lang="es" style="--d:2"><footer class="quote__who"><span class="quote__av" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="9" r="4"/><path d="M4 21c0-4.4 3.6-7 8-7s8 2.6 8 7z"/></svg></span><span><b>Marcia</b><span class="quote__c"><svg class="flag" viewBox="0 0 27 18" aria-hidden="true"><rect width="27" height="18" fill="#fff"/><g fill="#0038a8"><rect x="9" y="2" width="18" height="2"/><rect x="9" y="6" width="18" height="2"/><rect y="10" width="27" height="2"/><rect y="14" width="27" height="2"/></g><circle cx="4.5" cy="4.5" r="2.4" fill="#fcd116" stroke="#7b3f00" stroke-width=".3"/></svg>{{c_uy}}</span></span><span class="quote__score" aria-label="{{av_score}} 10">10</span></footer><p class="quote__tt">Hermoso lugar para hospedarse en Maragogi</p><p class="quote__d">{{q_d2}}</p><p>«El restaurante es un mega plus que ofrecen, la comida es deliciosa, variada y con excelente precio.»</p><a class="quote__nota" href="{{booking_url}}" target="_blank" rel="noopener">{{av_see}} ↗</a></blockquote>
+      <blockquote class="quote rv" lang="es" style="--d:3"><footer class="quote__who"><span class="quote__av" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="9" r="4"/><path d="M4 21c0-4.4 3.6-7 8-7s8 2.6 8 7z"/></svg></span><span><b>Beatriz</b><span class="quote__c"><svg class="flag" viewBox="0 0 27 18" aria-hidden="true"><rect width="27" height="18" fill="#74acdf"/><rect y="6" width="27" height="6" fill="#fff"/><circle cx="13.5" cy="9" r="2" fill="#f6b40e" stroke="#85340a" stroke-width=".3"/></svg>{{c_ar}}</span></span><span class="quote__score" aria-label="{{av_score}} 10">10</span></footer><p class="quote__tt">Encantador</p><p class="quote__d">{{q_d3}}</p><p>«La tranquilidad, el silencio, la maravillosa predisposición en la atención (…). Sin duda, volveríamos.»</p><a class="quote__nota" href="{{booking_url}}" target="_blank" rel="noopener">{{av_see}} ↗</a></blockquote>
+    </div>
+    <p class="aval__orig">{{av_orig}} · <a href="{{booking_url}}" target="_blank" rel="noopener">{{av_more}} →</a></p>
+  </div>
+</section>
+
+<section class="chegar" id="chegar" aria-labelledby="ch-t">
+  <div class="wrap chegar__grid">
+    <div class="chegar__info">
+      <p class="eyebrow rv">{{ch_eyebrow}}</p>
+      <h2 id="ch-t" class="h2 rv">{{ch_t}}</h2>
+      <p class="lead rv">{{ch_addr}}<br>{{ch_near}}</p>
+      <a class="btn btn--line rv" href="https://www.google.com/maps/search/?api=1&amp;query=Pousada+Enero+Maragogi" target="_blank" rel="noopener"><img src="/img/icons/icono-mapa.svg" alt="" width="24" height="24">{{ch_map}}</a>
+      <img class="chegar__mares" src="/img/trazo-mares.svg" alt="" width="420" height="92" loading="lazy">
+    </div>
+    <div class="faq">
+      <h3 class="faq__t rv">{{faq_t}}</h3>
+      <details class="rv"><summary>{{q1}}</summary><div class="faq__a"><p>{{a1}}</p></div></details>
+      <details class="rv"><summary>{{q2}}</summary><div class="faq__a"><p>{{a2}}</p></div></details>
+      <details class="rv"><summary>{{q3}}</summary><div class="faq__a"><p>{{a3}}</p></div></details>
+      <details class="rv"><summary>{{q4}}</summary><div class="faq__a"><p>{{a4}}</p></div></details>
+      <details class="rv"><summary>{{q5}}</summary><div class="faq__a"><p>{{a5}}</p></div></details>
+    </div>
+  </div>
+</section>

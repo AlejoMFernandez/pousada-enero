@@ -1,0 +1,63 @@
+<section class="pg-hero pg-hero--short" aria-labelledby="pg-t">
+  <div class="wrap">
+    <p class="eyebrow rv">{{pg.eyebrow}}</p>
+    <h1 id="pg-t" class="h2 pg-hero__t rv">{{pg.h1}}</h1>
+    <p class="lead rv">{{pg.lead}}</p>
+  </div>
+</section>
+
+<section class="suites" id="suites" aria-labelledby="suites-t">
+  <div class="wrap">
+    <div class="sec-head sec-head--row">
+      <div><h2 id="suites-t" class="h2 h2--m rv">{{pg.list}}</h2></div>
+      <a class="link link--map rv" href="#mapa">{{su_map}} <span aria-hidden="true">→</span></a>
+    </div>
+    <div class="filtros" data-filtros>
+      <div class="filtros__in">
+        <div class="chips" role="group" aria-label="{{f_label}}">
+          <button type="button" class="chip" data-f="mar" aria-pressed="false">{{f_mar}} <span class="chip__n" data-fn="mar"></span></button>
+          <button type="button" class="chip" data-f="sacada" aria-pressed="false">{{f_sacada}} <span class="chip__n" data-fn="sacada"></span></button>
+          <button type="button" class="chip" data-f="terrea" aria-pressed="false">{{f_terrea}} <span class="chip__n" data-fn="terrea"></span></button>
+          <button type="button" class="chip" data-f="tres" aria-pressed="false"><svg class="pi" viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="4.6" r="3"/><path d="M2.4 15c0-3.6 2.5-6 5.6-6s5.6 2.4 5.6 6z"/></svg>{{f_tres}} <span class="chip__n" data-fn="tres"></span></button>
+        </div>
+        <p class="filtros__res" aria-live="polite"><span data-count></span><button type="button" class="filtros__clear" data-clear hidden>{{js_clear}}</button></p>
+      </div>
+    </div>
+    <div class="cards" data-cards></div>
+    <p class="cards__none" hidden>{{js_none}}</p>
+  </div>
+</section>
+
+<section class="mapa" id="mapa" aria-labelledby="mapa-t">
+  <div class="wrap">
+    <div class="sec-head">
+      <div><p class="eyebrow rv">{{map_eyebrow}}</p><h2 id="mapa-t" class="h2 rv">{{map_t}}</h2></div>
+      <p class="hand rv"><span class="only-d">{{map_hint_d}}</span><span class="only-m">{{map_hint_m}}</span> ↓</p>
+    </div>
+    <div class="mapa__grid">
+      <div class="mapa__stage rv" data-map-stage>
+        <div class="mapa__layer" data-map-layer>
+          <svg viewBox="0 0 1100 940" width="1100" height="940" aria-hidden="true" data-map-svg>
+            <defs><mask id="mapaMask"><rect width="1100" height="940" fill="#fff"/><g fill="#000" data-map-holes></g></mask></defs>
+            <image href="/img/mapa-sat-1100.webp" width="1100" height="940" preserveAspectRatio="none"/>
+            <rect class="mapa__dim" width="1100" height="940" mask="url(#mapaMask)"/>
+            <path class="mapa__route" d="M659 746 L659 862"/>
+            <g data-map-frames></g>
+          </svg>
+        </div>
+        <div class="mapa__marks" data-map-marks></div>
+        <div class="mapa__compass" aria-hidden="true"><svg viewBox="0 0 14 20" width="12" height="18" fill="currentColor"><path d="M7 0 L13 20 L7 15 L1 20Z"/></svg>N</div>
+        <div class="mapa__ctrl">
+          <button type="button" data-map-zoom="1.5" aria-label="{{js_zoom_in}}">+</button>
+          <button type="button" data-map-zoom="0.6667" aria-label="{{js_zoom_out}}">−</button>
+          <button type="button" data-map-fit aria-label="{{js_map_all}}"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg></button>
+        </div>
+        <p class="mapa__attr">Imagem © Google</p>
+      </div>
+      <aside class="zona-panel" aria-live="polite" data-zona-panel></aside>
+    </div>
+  </div>
+  <template id="zona-data">{{ZONAS}}</template>
+</section>
+
+{{CTA_BOOK}}

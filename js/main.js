@@ -609,47 +609,52 @@
     draw();
   }
 
-  /* ---------- mesa del desayuno navegable ---------- */
+  /* ---------- mesa del desayuno: popup solo en hover / toque ---------- */
   var mesa = $('[data-mesa]');
   if (mesa) {
-    var dots = $$('.mesa__dot', mesa), chipsM = $$('.mesa__chip', mesa), info = $$('.mesa__data li', mesa), stage = $('.mesa__stage', mesa), scrollEl = $('[data-mesa-scroll]', mesa);
-    var pop = $('.mesa__pop', mesa), cn = $('[data-mesa-n]', mesa), ct = $('[data-mesa-t]', mesa), cp = $('[data-mesa-p]', mesa), N = dots.length, cur2 = -1, touched = false, autoT = 0;
-    function show(i, user) {
-      i = (i + N) % N; cur2 = i;
+    var dots = $$('.mesa__dot', mesa), info = $$('.mesa__data li', mesa), stage = $('.mesa__stage', mesa), scrollEl = $('[data-mesa-scroll]', mesa);
+    var pop = $('.mesa__pop', mesa), cn = $('[data-mesa-n]', mesa), ct = $('[data-mesa-t]', mesa), cp = $('[data-mesa-p]', mesa), N = dots.length, cur2 = -1, hideT = 0;
+    function show(i) {
+      clearTimeout(hideT);
+      if (i === cur2 && stage.classList.contains('is-on')) return;
+      cur2 = i;
       var d = dots[i], x = parseFloat(d.style.getPropertyValue('--x')), y = parseFloat(d.style.getPropertyValue('--y'));
       stage.style.setProperty('--sx', x + '%'); stage.style.setProperty('--sy', y + '%');
       stage.classList.add('is-on');
-      dots.forEach(function (el, k) { el.classList.toggle('is-on', k === i); el.setAttribute('aria-pressed', String(k === i)); });
-      chipsM.forEach(function (el, k) { el.classList.toggle('is-on', k === i); });
+      dots.forEach(function (el, k) { el.classList.toggle('is-on', k === i); el.setAttribute('aria-expanded', String(k === i)); });
       cn.textContent = ('0' + (i + 1)).slice(-2) + ' / ' + N; ct.textContent = info[i].dataset.t; cp.textContent = info[i].dataset.p;
       pop.style.left = x + '%'; pop.style.top = y + '%';
       pop.classList.toggle('to-left', x > 58); pop.classList.toggle('to-up', y > 62);
       pop.classList.remove('is-in'); void pop.offsetWidth; pop.classList.add('is-in');
       pop.style.setProperty('--shift', '0px');
       if (scrollEl.scrollWidth > scrollEl.clientWidth + 4) {
-        var maxS = scrollEl.scrollWidth - scrollEl.clientWidth;
-        var target = Math.max(0, Math.min(maxS, stage.clientWidth * x / 100 - scrollEl.clientWidth / 2));
-        scrollEl.scrollTo({ left: target, behavior: reduce ? 'auto' : 'smooth' });
-        var dx = stage.clientWidth * x / 100 - target, half = pop.offsetWidth / 2, vw = scrollEl.clientWidth, sh = 0;
+        var px = stage.clientWidth * x / 100, left = scrollEl.scrollLeft, vw = scrollEl.clientWidth;
+        if (px < left + 120 || px > left + vw - 120) {
+          left = Math.max(0, Math.min(scrollEl.scrollWidth - vw, px - vw / 2));
+          scrollEl.scrollTo({ left: left, behavior: reduce ? 'auto' : 'smooth' });
+        }
+        var dx = px - left, half = pop.offsetWidth / 2, sh = 0;
         if (dx - half < 10) sh = 10 - (dx - half); else if (dx + half > vw - 10) sh = (vw - 10) - (dx + half);
         pop.style.setProperty('--shift', sh + 'px');
       }
-      var chip = chipsM[i], bar = chip.parentNode;
-      if (bar.scrollWidth > bar.clientWidth) bar.scrollTo({ left: chip.offsetLeft - bar.clientWidth / 2 + chip.clientWidth / 2, behavior: reduce ? 'auto' : 'smooth' });
-      if (user) { touched = true; clearInterval(autoT); }
+    }
+    function hide() {
+      cur2 = -1; stage.classList.remove('is-on');
+      dots.forEach(function (el) { el.classList.remove('is-on'); el.setAttribute('aria-expanded', 'false'); });
     }
     var hov = matchMedia('(hover:hover)');
-    dots.forEach(function (d, k) { d.addEventListener('click', function () { show(k, true); }); d.addEventListener('mouseenter', function () { if (hov.matches) show(k, true); }); });
-    chipsM.forEach(function (d, k) { d.addEventListener('click', function () { show(k, true); }); });
-    $$('[data-mesa-go]', mesa).forEach(function (b) { b.addEventListener('click', function () { show(cur2 + (+b.dataset.mesaGo), true); }); });
-    mesa.addEventListener('keydown', function (e) { if (e.key === 'ArrowRight') { show(cur2 + 1, true); } if (e.key === 'ArrowLeft') { show(cur2 - 1, true); } });
-    show(0, false);
-    if (!reduce && 'IntersectionObserver' in window) {
-      new IntersectionObserver(function (es) {
-        clearInterval(autoT);
-        if (es[0].isIntersecting && !touched) autoT = setInterval(function () { show(cur2 + 1, false); }, 3400);
-      }, { threshold: 0.5 }).observe(stage);
-    }
+    dots.forEach(function (d, k) {
+      d.setAttribute('aria-expanded', 'false');
+      d.addEventListener('mouseenter', function () { if (hov.matches) show(k); });
+      d.addEventListener('mouseleave', function () { if (hov.matches) { clearTimeout(hideT); hideT = setTimeout(hide, 160); } });
+      d.addEventListener('focus', function () { show(k); });
+      d.addEventListener('blur', function () { hideT = setTimeout(function () { if (!mesa.contains(document.activeElement)) hide(); }, 60); });
+      d.addEventListener('pointerdown', function () { d._was = cur2 === k; });
+      d.addEventListener('click', function (e) { e.stopPropagation(); if (!hov.matches && d._was) { hide(); d.blur(); } else show(k); d._was = false; });
+    });
+    stage.addEventListener('mouseleave', function () { if (hov.matches) hide(); });
+    document.addEventListener('click', function (e) { if (cur2 > -1 && !e.target.closest('.mesa__dot')) hide(); });
+    mesa.addEventListener('keydown', function (e) { if (e.key === 'Escape') { hide(); } });
   }
 
   /* ---------- FAQ con animación ---------- */

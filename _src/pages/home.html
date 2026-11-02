@@ -140,7 +140,7 @@
       <p class="hand rv">{{ca_note}}</p>
     </div>
   </div>
-  <div class="mesa" data-mesa>
+  <div class="wrap"><div class="mesa" data-mesa>
     <div class="mesa__scroll" data-mesa-scroll>
       <figure class="mesa__stage">
         <img src="/img/cafe-mesa-h-1500.webp" srcset="/img/cafe-mesa-h-900.webp 900w, /img/cafe-mesa-h-1500.webp 1500w, /img/cafe-mesa-h-2000.webp 2000w" sizes="(min-width: 900px) min(1320px, 92vw), 760px" width="2009" height="1348" alt="{{cf_alt}}" loading="lazy" decoding="async">
@@ -149,14 +149,9 @@
         <div class="mesa__pop" aria-live="polite"><span class="mesa__cn" data-mesa-n>01 / 10</span><b class="mesa__ct" data-mesa-t></b><span class="mesa__cp" data-mesa-p></span></div>
       </figure>
     </div>
-    <div class="wrap mesa__bar">
-      <button type="button" class="arrow" data-mesa-go="-1" aria-label="{{pa_prev}}">←</button>
-      <div class="mesa__chips"><button type="button" class="mesa__chip" data-i="0">{{cf_1t}}</button><button type="button" class="mesa__chip" data-i="1">{{cf_2t}}</button><button type="button" class="mesa__chip" data-i="2">{{cf_3t}}</button><button type="button" class="mesa__chip" data-i="3">{{cf_4t}}</button><button type="button" class="mesa__chip" data-i="4">{{cf_5t}}</button><button type="button" class="mesa__chip" data-i="5">{{cf_6t}}</button><button type="button" class="mesa__chip" data-i="6">{{cf_7t}}</button><button type="button" class="mesa__chip" data-i="7">{{cf_8t}}</button><button type="button" class="mesa__chip" data-i="8">{{cf_9t}}</button><button type="button" class="mesa__chip" data-i="9">{{cf_10t}}</button></div>
-      <button type="button" class="arrow" data-mesa-go="1" aria-label="{{pa_next}}">→</button>
-    </div>
     <ol class="mesa__data" hidden><li data-t="{{cf_1t}}" data-p="{{cf_1p}}"></li><li data-t="{{cf_2t}}" data-p="{{cf_2p}}"></li><li data-t="{{cf_3t}}" data-p="{{cf_3p}}"></li><li data-t="{{cf_4t}}" data-p="{{cf_4p}}"></li><li data-t="{{cf_5t}}" data-p="{{cf_5p}}"></li><li data-t="{{cf_6t}}" data-p="{{cf_6p}}"></li><li data-t="{{cf_7t}}" data-p="{{cf_7p}}"></li><li data-t="{{cf_8t}}" data-p="{{cf_8p}}"></li><li data-t="{{cf_9t}}" data-p="{{cf_9p}}"></li><li data-t="{{cf_10t}}" data-p="{{cf_10p}}"></li></ol>
-    <div class="wrap"><p class="mesa__more"><img src="/img/icons/icono-cesta.svg" alt="" width="32" height="32">{{cf_more}}</p></div>
-  </div>
+    <div class="mesa__foot"><p class="mesa__hint"><span class="only-d">{{cf_hint_d}}</span><span class="only-m">{{cf_hint_m}}</span></p><p class="mesa__more"><img src="/img/icons/icono-cesta.svg" alt="" width="32" height="32">{{cf_more}}</p></div>
+  </div></div>
 </section>
 
 <section class="rest" id="restaurante" aria-labelledby="rest-t">

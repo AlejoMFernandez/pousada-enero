@@ -30,7 +30,7 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT@0,9..144,300..500,0..100;1,9..144,300..500,0..100&amp;family=Figtree:wght@400;500;600&amp;family=Nanum+Brush+Script&amp;display=swap">
 <link rel="preload" as="image" href="/img/hero-celu-600.webp" media="(max-width: 899px)" imagesrcset="/img/hero-celu-600.webp 600w, /img/hero-celu-900.webp 900w" imagesizes="100vw">
 <link rel="preload" as="image" href="/img/hero-desk-1600.webp" media="(min-width: 900px)" imagesrcset="/img/hero-desk-960.webp 960w, /img/hero-desk-1600.webp 1600w" imagesizes="60vw">
-<link rel="stylesheet" href="/css/styles.css?v=634215">
+<link rel="stylesheet" href="/css/styles.css?v=644116">
 <script>
 (function(){var d=document.documentElement;d.classList.add('js');try{if(true&&!matchMedia('(prefers-reduced-motion: reduce)').matches&&!sessionStorage.getItem('enero-intro')){d.classList.add('con-intro');}}catch(e){}setTimeout(function(){if(!window.__eneroOK){d.classList.remove('js','con-intro');}},4500);})();
 </script>
@@ -214,11 +214,11 @@
 <section class="cafe" id="cafe" aria-labelledby="cafe-t">
   <div class="wrap">
     <div class="sec-head">
-      <div><p class="eyebrow rv">Desayuno en la arena</p><h2 id="cafe-t" class="h2 rv">Tu desayuno va <em>hasta la playa.</em></h2><p class="lead mesa__lead rv">Tocá cada cosita de la mesa para ver qué llega en tu desayuno.</p></div>
+      <div><p class="eyebrow rv">Desayuno en la arena</p><h2 id="cafe-t" class="h2 rv">Tu desayuno va <em>hasta la playa.</em></h2><p class="lead mesa__lead rv">Todo lo que llega a tu mesa, cosita por cosita.</p></div>
       <p class="hand rv">con girasoles y bom dia</p>
     </div>
   </div>
-  <div class="mesa" data-mesa>
+  <div class="wrap"><div class="mesa" data-mesa>
     <div class="mesa__scroll" data-mesa-scroll>
       <figure class="mesa__stage">
         <img src="/img/cafe-mesa-h-1500.webp" srcset="/img/cafe-mesa-h-900.webp 900w, /img/cafe-mesa-h-1500.webp 1500w, /img/cafe-mesa-h-2000.webp 2000w" sizes="(min-width: 900px) min(1320px, 92vw), 760px" width="2009" height="1348" alt="Mesa de desayuno vista desde arriba, sobre la arena" loading="lazy" decoding="async">
@@ -227,14 +227,9 @@
         <div class="mesa__pop" aria-live="polite"><span class="mesa__cn" data-mesa-n>01 / 10</span><b class="mesa__ct" data-mesa-t></b><span class="mesa__cp" data-mesa-p></span></div>
       </figure>
     </div>
-    <div class="wrap mesa__bar">
-      <button type="button" class="arrow" data-mesa-go="-1" aria-label="Anterior">←</button>
-      <div class="mesa__chips"><button type="button" class="mesa__chip" data-i="0">Frutas de estación</button><button type="button" class="mesa__chip" data-i="1">Bombita de chocolate</button><button type="button" class="mesa__chip" data-i="2">Yogur con granola</button><button type="button" class="mesa__chip" data-i="3">Canasta de panes</button><button type="button" class="mesa__chip" data-i="4">Mermelada</button><button type="button" class="mesa__chip" data-i="5">Queso y jamón</button><button type="button" class="mesa__chip" data-i="6">Budines y salados</button><button type="button" class="mesa__chip" data-i="7">Torta del día</button><button type="button" class="mesa__chip" data-i="8">Café con leche</button><button type="button" class="mesa__chip" data-i="9">Jugo natural</button></div>
-      <button type="button" class="arrow" data-mesa-go="1" aria-label="Siguiente">→</button>
-    </div>
     <ol class="mesa__data" hidden><li data-t="Frutas de estación" data-p="Frutas tropicales cortadas en el momento."></li><li data-t="Bombita de chocolate" data-p="Algo dulce para arrancar el día."></li><li data-t="Yogur con granola" data-p="Cremoso, con granola crocante arriba."></li><li data-t="Canasta de panes" data-p="Panes calentitos, en canasta con servilleta de lino."></li><li data-t="Mermelada" data-p="Para acompañar los panes."></li><li data-t="Queso y jamón" data-p="Fiambres en fetas para armarte el pan."></li><li data-t="Budines y salados" data-p="Una selección de budines y salados horneados."></li><li data-t="Torta del día" data-p="Una porción para acompañar el café."></li><li data-t="Café con leche" data-p="Calentito, como más te guste."></li><li data-t="Jugo natural" data-p="De fruta, frío, en botellita."></li></ol>
-    <div class="wrap"><p class="mesa__more"><img src="/img/icons/icono-cesta.svg" alt="" width="32" height="32">Y de la carta, hechos en el momento: tapioca, cuscuz, huevos y tostado.</p></div>
-  </div>
+    <div class="mesa__foot"><p class="mesa__hint"><span class="only-d">Pasá el mouse por los puntos para ver cada cosa.</span><span class="only-m">Tocá los puntos para ver cada cosa.</span></p><p class="mesa__more"><img src="/img/icons/icono-cesta.svg" alt="" width="32" height="32">Y de la carta, hechos en el momento: tapioca, cuscuz, huevos y tostado.</p></div>
+  </div></div>
 </section>
 
 <section class="rest" id="restaurante" aria-labelledby="rest-t">
@@ -347,7 +342,7 @@
 </div>
 
 <script>window.ENERO={lang:"es",motor:"https://book.securebookings.net/roomrate?id=77e9745c-0dfa-1693866830-44fe-a199-d5467f240167&lang=es",t:{"m2": "m²", "pax": "hasta {n} personas", "units": "Suites", "unit": "Suite", "book": "Reservar esta suite · 17% OFF", "photos": "fotos", "close": "Cerrar", "prev": "Foto anterior", "next": "Foto siguiente", "feat": "En la suite", "beds": "Camas", "size": "Tamaño", "people": "{n} personas", "seemore": "Ver suite", "tag_mar": "Vista al mar", "tag_sacada": "Balcón", "tag_terrea": "Planta baja", "tag_tres": "Para 3", "none": "No hay suites con ese filtro.", "dates": "Elegí la fecha de salida después de la de entrada.", "pick": "Elegir fecha", "cal_in": "Elegí la fecha de entrada", "cal_out": "Ahora elegí la salida", "nights": "{n} noches", "night": "1 noche", "prev_m": "Mes anterior", "next_m": "Mes siguiente", "map_all": "Ver toda la pousada", "map_back": "Todos los espacios", "map_kicker": "Mapa de la pousada", "map_t": "Elegí un espacio", "map_p": "Todo frente a la playa de Maragogi.", "zoom_in": "Acercar", "zoom_out": "Alejar", "sub_rest": "Restaurante en la arena", "sub_praia": "Piscinas naturales", "sub_casa": "{n} suites", "clear": "Limpiar filtros", "count": "{n} suites", "count1": "1 suite", "book_short": "Reservar", "details": "Ver suite"}};</script>
-<script src="/js/data.js?v=634215" defer></script>
-<script src="/js/main.js?v=634215" defer></script>
+<script src="/js/data.js?v=644116" defer></script>
+<script src="/js/main.js?v=644116" defer></script>
 </body>
 </html>
